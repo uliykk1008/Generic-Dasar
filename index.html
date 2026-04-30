@@ -1,1 +1,1168 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OOP Report - Uliya Gumpari</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700;900&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      background: #000814;
+      overflow-x: hidden;
+    }
+
+    /* Galaxy Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 20% 30%, #001d3d, transparent 40%),
+        radial-gradient(circle at 80% 70%, #3a0ca3, transparent 40%),
+        radial-gradient(circle at 50% 50%, #000814, transparent 60%);
+      z-index: -2;
+    }
+
+    /* Moving Stars Effect */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image:
+        radial-gradient(1px 1px at 10% 10%, #fff, transparent),
+        radial-gradient(2px 2px at 30% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 80%, #ffd60a, transparent),
+        radial-gradient(2px 2px at 90% 10%, #fff, transparent);
+      background-size: 500px 500px;
+      animation: moveStars 100s linear infinite;
+    }
+
+    @keyframes moveStars {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-500px);
+      }
+    }
+
+    header {
+      text-align: center;
+      padding: 140px 20px 80px;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      letter-spacing: 5px;
+      color: #ffd60a;
+      text-shadow: 0 0 30px rgba(255, 214, 10, 0.4);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      color: #00f5ff;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 60px;
+      margin-bottom: 100px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #ffd60a;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 4px;
+      background: #00f5ff;
+      box-shadow: 0 0 10px #00f5ff;
+    }
+
+    p {
+      font-weight: 300;
+      line-height: 2;
+      margin-bottom: 30px;
+      color: #e0e0e0;
+      font-size: 1.1rem;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    ul li {
+      margin-bottom: 15px;
+      padding-left: 35px;
+      position: relative;
+      color: #e0e0e0;
+    }
+
+    ul li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: #ffd60a;
+      font-size: 1.2rem;
+    }
+
+    /* CODE BOX STYLING */
+    .code-container {
+      margin: 30px 0;
+      background: #050505;
+      border: 1px solid #333;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      background: #111;
+      padding: 10px 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      color: #666;
+      border-bottom: 1px solid #222;
+      text-transform: uppercase;
+    }
+
+    pre {
+      padding: 25px;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #00ff88;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 16px 45px;
+      border: none;
+      border-radius: 40px;
+      background: #ffd60a;
+      color: black;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.4s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    button:hover {
+      background: white;
+      box-shadow: 0 0 40px #ffd60a;
+      transform: scale(1.05);
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(15px);
+    }
+
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 85%;
+      background: black;
+      border: 2px solid #ffd60a;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(255, 214, 10, 0.3);
+    }
+
+    .modal-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .close {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      font-size: 45px;
+      color: #ffd60a;
+      cursor: pointer;
+      z-index: 1001;
+      font-weight: 900;
+    }
+
+    footer {
+      text-align: center;
+      padding: 100px 20px;
+      color: #666;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+    }
+
+    .highlight {
+      color: #00f5ff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stars"></div>
+
+  <header>
+    <h1>POLIMORFISME DAN ABSTRAKSI
+    <p>Uliya Gumpari | 251410008 | Kelas: SI2A</p>
+  </header>
+
+  <div class="container">
+
+      <section>
+  <h2>01. Pengertian Pewarisan</h2>
+<p><b>Inheritance:</b></p>
+
+  <ul>
+    <li><b>extends</b> keyword untuk pewarisan class</li>
+    <li><b>super()</b> untuk memanggil constructor parent</li>
+    <li><b>@override</b> untuk mengubah (override) method dari parent</li>
+  </ul>
+
+  <div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>// Nama  : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Hewan {
+  void bersuara() => print('...');
+}
+
+class Anjing extends Hewan {
+  @override
+  void bersuara() => print('Guk Guk');
+}
+
+void main() {
+  Hewan hewan = Anjing();
+  hewan.bersuara();
+}
+</code></pre>
+  </div>
+
+  <button onclick="openModal('https://dartpad.dev/?id=ad82695d5ca41a3be4b47bb708bf7a1c&run=true')">Run Program</button>
+   </section>
+
+    <section>
+  <h2>02. Pengantar Polimorfisme</h2>
+
+ <p>
+    <b>Polimorfisme</b> berasal dari kata <i>poly</i> yang berarti banyak dan 
+    <i>morph</i> yang berarti bentuk, sehingga dapat diartikan sebagai “banyak bentuk”.
+  </p>
+
+  <p>
+    Konsep polimorfisme adalah objek dari subclass dapat diperlakukan sebagai 
+    objek dari superclass. Hal ini memungkinkan satu tipe data digunakan untuk 
+    berbagai objek yang berbeda.
+  </p>
+
+  <p>
+    Sebagai contoh, Kucing, Anjing, dan Burung semuanya dapat dianggap sebagai Hewan.
+  </p>
+
+  <p><b>Tipe Polimorfisme:</b></p>
+  <ul>
+    <li>Compile-time polymorphism: Method overloading (tidak didukung dalam Dart)</li>
+    <li>Runtime polymorphism: Method overriding (didukung dalam Dart)</li>
+  </ul>
+</section>
+      
+    <section>
+      <h2>03. Polimorfisme dengan Inheritance</h2>
+     <p>
+    Polimorfisme dengan inheritance memungkinkan referensi dengan tipe parent
+    digunakan untuk menampung objek dari class child.
+  </p>
+
+  <p>
+    Hal ini membuat satu tipe data dapat digunakan untuk berbagai objek
+    yang memiliki hubungan pewarisan.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Bentuk {
+  void gambar() => print('Menggambar bentuk');
+}
+
+class Persegi extends Bentuk {
+  @override
+  void gambar() => print('Menggambar Persegi');
+}
+
+class PersegiPanjang extends Bentuk {
+  @override
+  void gambar() => print('Menggambar Persegi Panjang');
+}
+
+void main() {
+  Bentuk b1 = Persegi();
+  Bentuk b2 = PersegiPanjang();
+
+  b1.gambar();
+  b2.gambar();
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=8f8a5dda6209b566648956376c3ef81c&run=true')">Run Program</button>
+    </section>
+
+    <section>
+      <h2>04. Manfaat Polimorfisme</h2>
+    <ul>
+    <li><b>Fleksibilitas:</b> Program dapat digunakan untuk berbagai jenis objek</li>
+    <li><b>Pengembangan mudah:</b> Penambahan tipe baru dapat dilakukan tanpa mengubah banyak kode</li>
+    <li><b>Penggunaan ulang kode:</b> Method yang sama dapat dimanfaatkan kembali dari class induk</li>
+    <li><b>Kemudahan perawatan:</b> Perubahan pada program lebih mudah dikelola</li>
+  </ul>
+</section>
+     
+    <section>
+      <h2>05. Is dan As Operator</h2>
+    <ul>
+    <li><b>is</b>: Untuk memeriksa jenis dari suatu objek</li>
+    <li><b>as</b>: Untuk mengubah atau menyesuaikan tipe objek</li>
+  </ul>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+class Transportasi {}
+
+class Bus extends Transportasi {
+  void klakson() {
+    print('Bip bip!');
+  }
+}
+
+void main() {
+  Bus k = Bus();
+  k.klakson();
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=c4909569242e59f88b07e4dc6ead5c4d&run=true')">Run Program</button>
+    </section>
+
+     <section>
+      <h2>06. Praktik 1 Polimorfisme dengan List</h2>
+  <p>
+    Sebuah list dengan tipe parent dapat menyimpan berbagai objek dari subclass yang berbeda.
+  </p>
+
+  <p>
+    Ketika dilakukan perulangan, setiap objek akan menjalankan method sesuai dengan
+    implementasi yang dimilikinya masing-masing.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Hewan {
+  void bersuara() {
+    print('Hewan bersuara');
+  }
+}
+
+class Kucing extends Hewan {
+  @override
+  void bersuara() => print('Meong');
+}
+
+class Anjing extends Hewan {
+  @override
+  void bersuara() => print('Guk guk');
+}
+
+class Burung extends Hewan {
+  @override
+  void bersuara() => print('Cuit cuit');
+}
+
+void main() {
+
+  List<Hewan> daftarHewan = [
+    Kucing(),
+    Anjing(),
+    Burung(),
+  ];
+
+  
+  for (var h in daftarHewan) {
+    h.bersuara();
+  }
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=931f7a6cab62040fc5c76f6b4951ac2d&run=true')">Run Program</button>
+    </section>
+
+       <section>
+  <h2>07.Pengantar Abstraksi</h2>
+
+  <p>
+    Abstraksi adalah konsep dalam Object Oriented Programming (OOP) yang digunakan
+    untuk menyembunyikan detail implementasi dan hanya menampilkan bagian penting
+    dari suatu objek kepada pengguna.
+  </p>
+
+  <p>
+    Dengan abstraksi, pengguna tidak perlu mengetahui bagaimana suatu proses bekerja,
+    tetapi cukup mengetahui apa yang dapat dilakukan oleh objek tersebut.
+  </p>
+
+  <p><b>Konsep Abstraksi:</b></p>
+  <ul>
+    <li>Menyederhanakan sistem dengan menyembunyikan detail yang tidak diperlukan</li>
+    <li>Menampilkan hanya fitur atau fungsi utama</li>
+    <li>Menggunakan abstract class atau interface</li>
+  </ul>
+
+  <p><b>Tujuan Abstraksi:</b></p>
+  <ul>
+    <li>Membuat kode lebih sederhana dan mudah dipahami</li>
+    <li>Mengurangi kompleksitas program</li>
+    <li>Meningkatkan keamanan dengan menyembunyikan detail internal</li>
+    <li>Mempermudah pengembangan dan perawatan kode</li>
+  </ul>
+
+  <p><b>Cara Menerapkan Abstraksi di Dart:</b></p>
+  <ul>
+    <li>Menggunakan <b>abstract class</b> untuk membuat kerangka dasar</li>
+    <li>Mendefinisikan <b>abstract method</b> tanpa isi</li>
+    <li>Mengimplementasikan method tersebut di class turunan</li>
+    <li>Menggunakan <b>implements</b> untuk membuat interface</li>
+  </ul>
+</section>
+
+    <section>
+      <h2>08. Abstract Class</h2>
+  <p>
+    Abstract class merupakan class yang berfungsi sebagai blueprint
+    dan hanya dapat digunakan melalui class turunannya.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+abstract class Kendaraan {
+  String? merk;
+
+  void start();
+
+  void stop() {
+    print('Kendaraan berhenti');
+  }
+}
+
+class Mobil extends Kendaraan {
+  @override
+  void start() {
+    print('Mobil $merk menyala');
+  }
+}
+
+void main() {
+  Mobil m = Mobil();
+  m.merk = "BMW"; // merk mobil
+  m.start();
+  m.stop();
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=a2351f34fa385e85f3c051728f13a8ed&run=true')">Run Program</button>
+    </section>
+
+    <section>
+      <h2>09. Abstract Method</h2>
+     <p>
+    Abstract method adalah method tanpa implementasi yang wajib
+    di-override oleh class turunannya.
+  </p>
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+          abstract class AlatMusik {
+  void mainkan();
+
+  void info() {
+    print('Ini adalah alat musik');
+  }
+}
+
+class Gitar extends AlatMusik {
+  @override
+  void mainkan() {
+    print('Jreng jreng...');
+  }
+}
+
+void main() {
+  Gitar g = Gitar();
+  g.info();
+  g.mainkan();
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=e74bc16f8d99cd6fcf9a93ed7aeb365d&run=true')">Run Program</button>
+    </section>
+
+    <section>
+      <h2>10.Interface di Dart </h2>
+  <p>
+    Interface di Dart adalah cara agar sebuah class memaksa class lain 
+    untuk mengimplementasikan method tertentu menggunakan <code>implements</code>.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+interface class Flyable {
+  void terbang() => print('Terbang...');
+}
+
+class KupuKupu implements Flyable {
+  @override
+  void terbang() => print('Kupu-kupu terbang indah');
+}
+
+class Drone implements Flyable {
+  @override
+  void terbang() => print('Drone terbang cepat');
+}
+
+void main() {
+  KupuKupu k = KupuKupu();
+  Drone d = Drone();
+
+  k.terbang();
+  d.terbang();
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=0dc7353cbec4f490fb7a532d17887bea&run=true')">Run Program</button>
+    </section>
+
+    <section>
+  <h2>11. Perbedaan Extends vs Implements di Dart</h2>
+
+  <p><strong>extends:</strong> Digunakan untuk mewarisi properti dan method dari class lain. Class turunan dapat menggunakan atau override method dari class induk.</p>
+
+  <p><strong>implements:</strong> Digunakan untuk memaksa class lain mengimplementasikan semua method dari class interface. Method harus di-override, tidak mewarisi implementasi.</p>
+</section>
+
+    <section>
+      <h2>12. Static Members dan Method</h2>
+      <p>
+    Static digunakan untuk membuat variabel atau method yang bisa diakses
+    tanpa membuat objek dari class. Biasanya dipanggil langsung dengan nama class.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+class MathUtils {
+  static double pi = 3.14;
+
+  static int add(int x, int y) {
+    return x + y;
+  }
+}
+
+void main() {
+  print('Nilai pi : ${MathUtils.pi}');
+  print('Result : ${MathUtils.add(10, 20)}');
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=b2345bcbd0536fd65f575b6a9b51a66c&run=true')">Run Program</button>
+    </section>
+       <section>
+      <h2>13. Praktik 2 Sistem Pembayaran</h2>
+     <p>
+    Sistem pembayaran adalah mekanisme yang digunakan untuk melakukan transaksi 
+    antara pembeli dan penjual, baik secara tunai maupun non-tunai seperti 
+    transfer bank, e-wallet, dan kartu kredit.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+abstract class MetodePembayaran {
+  void bayar(double jumlah);
+}
+
+class KartuKredit implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan Kartu Kredit');
+  }
+}
+
+class EWallet implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan E-Wallet');
+  }
+}
+
+class Tunai implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan Tunai');
+  }
+}
+
+void main() {
+  MetodePembayaran m1 = KartuKredit();
+  MetodePembayaran m2 = EWallet();
+  MetodePembayaran m3 = Tunai();
+
+  m1.bayar(100000);
+  m2.bayar(50000);
+  m3.bayar(20000);
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=6832444a1db2638d731bcc62f0ddd175&run=true')">Run Program</button>
+    </section>
+
+    <section>
+      <h2>14. Studi Kasus : Sistem Bentuk Geometri</h2>
+    <p>
+    Sistem bentuk geometri digunakan untuk menghitung luas dan keliling 
+    berbagai bangun seperti persegi, lingkaran, dan segitiga dengan 
+    memanfaatkan konsep class dan method.
+  </p>
+       <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+abstract class Bentuk {
+  double hitungLuas();
+  double hitungKeliling();
+
+  void info() {
+    print('Luas: ${hitungLuas()}, Keliling: ${hitungKeliling()}');
+  }
+}
+
+class Persegi implements Bentuk {
+  double sisi;
+  Persegi(this.sisi);
+
+  @override
+  double hitungLuas() => sisi * sisi;
+
+  @override
+  double hitungKeliling() => 4 * sisi;
+
+  @override
+  void info() {
+    print(
+        'Persegi dengan sisi $sisi memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}');
+  }
+}
+
+class Lingkaran implements Bentuk {
+  double radius;
+  Lingkaran(this.radius);
+
+  @override
+  double hitungLuas() => 3.14 * radius * radius;
+
+  @override
+  double hitungKeliling() => 2 * 3.14 * radius;
+
+  @override
+  void info() {
+    print(
+        'Lingkaran dengan radius $radius memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}');
+  }
+}
+
+void main() {
+  Bentuk b1 = Persegi(4);
+  Bentuk b2 = Lingkaran(7);
+
+  b1.info();
+  b2.info();
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=21263836fbeb5a91e5557ef412c21776&run=true')">Run Program</button>
+    </section>
+
+    <section>
+  <h2>15. Kesimpulan</h2>
+
+  <p>
+    Polimorfisme memungkinkan objek digunakan dalam berbagai bentuk, 
+    sedangkan abstraksi membantu menyembunyikan detail implementasi. 
+    Keduanya membuat kode lebih fleksibel, terstruktur, dan mudah 
+    dikembangkan serta dipelihara.
+  </p>
+</section>
+
+      <section>
+  <h2>16.Bonus 1 : Class Pekerja </h2>
+<p>
+    Buat abstract atau interface class <b>Pekerja</b> dengan method <i>bekerja()</i>. 
+    Kemudian buat beberapa class seperti Programmer, Dokter, dan Guru yang 
+    mengimplementasikan method tersebut. Tampilkan hasilnya menggunakan konsep polimorfisme.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+abstract class Pekerja {
+  void bekerja(); // abstract
+
+  void info() {
+    print('Ini adalah pekerja');
+  }
+}
+
+class Programmer implements Pekerja {
+  @override
+  void bekerja() {
+    print('Programmer sedang coding');
+  }
+
+  @override
+  void info() {
+    print('Pekerja: Programmer');
+  }
+}
+
+class Dokter implements Pekerja {
+  @override
+  void bekerja() {
+    print('Dokter sedang memeriksa pasien');
+  }
+
+  @override
+  void info() {
+    print('Pekerja: Dokter');
+  }
+}
+
+class Guru implements Pekerja {
+  @override
+  void bekerja() {
+    print('Guru sedang mengajar');
+  }
+
+  @override
+  void info() {
+    print('Pekerja: Guru');
+  }
+}
+
+void main() {
+  List<Pekerja> daftar = [
+    Programmer(),
+    Dokter(),
+    Guru(),
+  ];
+
+  for (var p in daftar) {
+    p.info();
+    p.bekerja();
+    print('---');
+  }
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=0393ef45b97b16464ac91210e49731eb&run=true')">Run Program</button>
+    </section>
+
+  <section>
+  <h2>17. Bonus 2 : Class Tablet</h2>
+  <p>
+    Class Pekerja adalah konsep dalam pemrograman yang digunakan untuk 
+    merepresentasikan berbagai jenis pekerjaan dengan method yang sama, 
+    tetapi memiliki implementasi yang berbeda pada setiap turunannya.
+  </p>
+
+  <div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>// Nama  : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Komputer {
+  void mengetik() => print('Mengetik...');
+}
+
+class Kamera {
+  void foto() => print('Mengambil foto...');
+}
+
+class Telepon {
+  void telepon() => print('Menelpon...');
+}
+
+class Tablet implements Komputer, Kamera, Telepon {
+  @override
+  void mengetik() => print('Tablet bisa mengetik');
+
+  @override
+  void foto() => print('Tablet bisa foto');
+
+  @override
+  void telepon() => print('Tablet bisa telepon');
+}
+
+void main() {
+  Tablet t = Tablet();
+
+  t.mengetik();
+  t.foto();
+  t.telepon();
+}
+</code></pre>
+  </div>
+
+  <button onclick="openModal('https://dartpad.dev/?id=f1a8c3b977a481a3894c5b4849856603&run=true')">Run Program</button>
+   </section>
+
+      <section>
+  <h2>18. Bonus 3 : Class Mathutils</h2>
+<p>
+    Class MathUtils adalah class yang berisi kumpulan method dan variabel static 
+    untuk melakukan operasi perhitungan matematika tanpa perlu membuat objek.
+  </p>
+
+  <div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>// Nama  : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'dart:math';
+
+class MathUtils {
+
+  static int faktorial(int n) {
+    if (n <= 1) return 1;
+    return n * faktorial(n - 1);
+  }
+
+  static bool isPrima(int n) {
+    if (n < 2) return false;
+
+    for (int i = 2; i <= sqrt(n); i++) {
+      if (n % i == 0) return false;
+    }
+    return true;
+  }
+
+  static double roundDouble(double value, int decimal) {
+    double mod = pow(10, decimal).toDouble();
+    return (value * mod).round() / mod;
+  }
+
+  static int randomInt(int min, int max) {
+    return min + Random().nextInt(max - min + 1);
+  }
+
+  static double randomDouble(double min, double max) {
+    return min + Random().nextDouble() * (max - min);
+  }
+
+  static double rataRata(List<num> data) {
+    return data.reduce((a, b) => a + b) / data.length;
+  }
+
+  static double median(List<num> data) {
+    var sorted = List<num>.from(data)..sort();
+    int n = sorted.length;
+
+    if (n % 2 == 1) {
+      return sorted[n ~/ 2].toDouble();
+    } else {
+      return (sorted[n ~/ 2 - 1] + sorted[n ~/ 2]) / 2;
+    }
+  }
+}
+
+void main() {
+  print(MathUtils.faktorial(5));
+  print(MathUtils.isPrima(7));
+  print(MathUtils.roundDouble(3.14159, 2));
+  print(MathUtils.randomInt(1, 10));
+  print(MathUtils.randomDouble(1, 5));
+  print(MathUtils.rataRata([1, 2, 3, 4]));
+  print(MathUtils.median([1, 2, 3, 4, 5]));
+}
+</code></pre>
+  </div>
+
+  <button onclick="openModal('https://dartpad.dev/?id=afa267be283fff316ebe654a6fe027c5&run=true')">Run Program</button>
+   </section>
+
+        <section>
+  <h2>19. Challenge</h2>
+<p>
+    Sistem ini menggunakan abstract class <b>MediaPlayer</b> sebagai dasar, 
+    serta interface <b>Playable</b> dan <b>Pausable</b> untuk mengatur fungsi. 
+    Class <b>AudioPlayer</b> dan <b>VideoPlayer</b> mengimplementasikan 
+    fitur tersebut sesuai kebutuhan.
+  </p>
+  <div class="code-container">
+    <div class="code-header">DART SOURCE CODE</div>
+<pre><code>// Nama  : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+abstract class MediaPlayer {
+  void load(String file);
+}
+
+abstract class Playable {
+  void play();
+}
+
+abstract class Pausable {
+  void pause();
+}
+
+class AudioPlayer extends MediaPlayer implements Playable, Pausable {
+  String? file;
+
+  @override
+  void load(String file) {
+    this.file = file;
+    print('Audio dimuat: $file');
+  }
+
+  @override
+  void play() {
+    print('Audio diputar');
+  }
+
+  @override
+  void pause() {
+    print('Audio dijeda');
+  }
+}
+
+class VideoPlayer extends MediaPlayer implements Playable, Pausable {
+  String? file;
+
+  @override
+  void load(String file) {
+    this.file = file;
+    print('Video dimuat: $file');
+  }
+
+  @override
+  void play() {
+    print('Video diputar');
+  }
+
+  @override
+  void pause() {
+    print('Video dijeda');
+  }
+}
+
+void main() {
+  List<MediaPlayer> players = [
+    AudioPlayer(),
+    VideoPlayer(),
+  ];
+
+  for (var p in players) {
+    p.load('file.mp3 / file.mp4');
+
+    if (p is Playable) {
+      p.play();
+    }
+    if (p is Pausable) {
+      p.pause();
+    }
+
+    print('---');
+  }
+}
+</code></pre>
+  </div>
+
+  <button onclick="openModal('https://dartpad.dev/?id=b293ae1ba2deaae0f47e85954c1a3fd3&run=true')">Run Program</button>
+   </section>
+
+
+    
+
+  </div>
+
+  <footer>
+    © 2026 - ULIYA GUMPARI ✨
+  </footer>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <iframe id="dartFrame" src=""></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Reveal Animations
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Modal Logic
+    function openModal(link) {
+      document.getElementById("modal").style.display = "block";
+      document.getElementById("dartFrame").src = link;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("dartFrame").src = "";
+      document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function (e) {
+      if (e.target == document.getElementById("modal")) closeModal();
+    }
+
+    // SECURITY PROTOCOL: ANTI-VANDALISM & ANTI-VIEWSOURCE
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function (e) {
+      if (e.keyCode == 123) return false; // F12
+      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false; // Ctrl+Shift+I/J/C
+      if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
+      if (e.ctrlKey && e.keyCode == 83) return false; // Ctrl+S
+    };
+    document.onselectstart = function () { return false; };
+
+  </script>
+
+</body>
+
+</html>
 
