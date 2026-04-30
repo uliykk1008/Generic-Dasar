@@ -272,46 +272,40 @@
   <div class="stars"></div>
 
   <header>
-    <h1>POLIMORFISME DAN ABSTRAKSI
+    <h1>GENERIC DI DART
     <p>Uliya Gumpari | 251410008 | Kelas: SI2A</p>
   </header>
 
   <div class="container">
 
       <section>
-  <h2>01. Pengertian Pewarisan</h2>
-<p><b>Inheritance:</b></p>
+  <h2>01. Pengantar Generic</h2>
+  <p>
+    Generic adalah fitur dalam bahasa pemrograman seperti Dart yang memungkinkan kita membuat kode 
+    yang dapat digunakan untuk berbagai tipe data tanpa harus menentukan tipe secara langsung. 
+    Dengan menggunakan <b>type parameter</b> seperti &lt;T&gt;, tipe data bisa ditentukan saat kode digunakan 
+    sehingga lebih fleksibel.
+  </p>
 
+  <p>
+    Secara konsep, generic membantu membuat kode yang <b>reusable</b> dan menjaga <b>type safety</b>, 
+    sehingga kesalahan tipe data bisa dicegah sejak awal.
+  </p>
+
+  <p><b>Manfaat Generic:</b></p>
   <ul>
-    <li><b>extends</b> keyword untuk pewarisan class</li>
-    <li><b>super()</b> untuk memanggil constructor parent</li>
-    <li><b>@override</b> untuk mengubah (override) method dari parent</li>
+    <li>Kode bisa digunakan kembali (reusable)</li>
+    <li>Lebih aman karena type safety</li>
+    <li>Mengurangi duplikasi kode</li>
+    <li>Lebih fleksibel untuk berbagai tipe data</li>
+    <li>Mempermudah pengelolaan kode</li>
   </ul>
 
-  <div class="code-container">
-    <div class="code-header">DART SOURCE CODE</div>
-<pre><code>// Nama  : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-class Hewan {
-  void bersuara() => print('...');
-}
-
-class Anjing extends Hewan {
-  @override
-  void bersuara() => print('Guk Guk');
-}
-
-void main() {
-  Hewan hewan = Anjing();
-  hewan.bersuara();
-}
-</code></pre>
-  </div>
-
-  <button onclick="openModal('https://dartpad.dev/?id=ad82695d5ca41a3be4b47bb708bf7a1c&run=true')">Run Program</button>
-   </section>
+  <p>
+    Analogi sederhana, generic seperti <b>cetakan kue</b> yang bisa digunakan untuk berbagai rasa 
+    tanpa harus membuat cetakan baru setiap kali.
+  </p>
+</section>
 
     <section>
   <h2>02. Pengantar Polimorfisme</h2>
