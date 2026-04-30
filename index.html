@@ -264,6 +264,28 @@
       color: #00f5ff;
       font-weight: 600;
     }
+    .label {
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.label::before {
+  font-size: 16px;
+}
+
+.label.success::before {
+  content: "✔";
+  color: #00ff88;
+}
+
+.label.error::before {
+  content: "✖";
+  color: #ff4d4d;
+}
   </style>
 </head>
 
@@ -310,7 +332,7 @@
     <section>
   <h2>02. Masalah Tanpa Generic</h2>
       
-      <p class="label">Non Generic (Jalan)</p> 
+     <p class="label success">Non Generic (Jalan)</p>
   <p>
     Pada contoh ini, program masih menggunakan <b>dynamic</b> sehingga data bisa berupa apa saja.
     Selama tipe data yang dimasukkan sesuai, program tetap bisa berjalan dengan normal.
@@ -346,7 +368,7 @@ void main() {
 
       <button onclick="openModal('https://dartpad.dev/?id=1e3d898faa9651cb786ab70f46b3668e&run=true')">Run Program Succes</button>
       
-  <p class="label">Non Generic (Error)</p>
+<p class="label error">Non Generic (Error)</p>
   <p>
     Pada contoh ini, program masih menggunakan <b>dynamic</b> sehingga data bisa berupa tipe apa saja.
     Namun, hal ini bisa menyebabkan masalah ketika tipe data yang digunakan tidak sesuai.
