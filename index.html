@@ -406,20 +406,22 @@ void main() {
       <button onclick="openModal('https://dartpad.dev/?id=3b63cf2dcb2e9c683879290c29f0b9ff&run=true')">Run Program Error</button>
       
 </section>
-
-
-      
+ 
     <section>
-      <h2>03. Polimorfisme dengan Inheritance</h2>
-     <p>
-    Polimorfisme dengan inheritance memungkinkan referensi dengan tipe parent
-    digunakan untuk menampung objek dari class child.
+      <h2>03. Generic</h2>
+    <p class="label success">Generic (Jalan)</p>
+  <p>
+    Pada contoh ini, program menggunakan <b>generic</b> sehingga tipe data sudah ditentukan sejak awal.
+    Hal ini membuat data yang digunakan menjadi lebih terkontrol dan aman.
   </p>
 
-  <p>
-    Hal ini membuat satu tipe data dapat digunakan untuk berbagai objek
-    yang memiliki hubungan pewarisan.
-  </p>
+  <p><b>Penjelasan:</b></p>
+  <ul>
+    <li>Tipe data sudah ditentukan sebagai <b>int</b></li>
+    <li>Data yang dimasukkan sesuai dengan tipe</li>
+    <li>Program berjalan dengan normal tanpa error</li>
+    <li>Lebih aman karena type sudah dikunci</li>
+  </ul>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -427,35 +429,64 @@ void main() {
 // NIM   : 251410008
 // Kelas : SI2A
 
-class Bentuk {
-  void gambar() => print('Menggambar bentuk');
-}
+class Box<T> {
+  T data;
 
-class Persegi extends Bentuk {
-  @override
-  void gambar() => print('Menggambar Persegi');
-}
-
-class PersegiPanjang extends Bentuk {
-  @override
-  void gambar() => print('Menggambar Persegi Panjang');
+  Box(this.data);
 }
 
 void main() {
-  Bentuk b1 = Persegi();
-  Bentuk b2 = PersegiPanjang();
+  var box = Box<int>(10);
 
-  b1.gambar();
-  b2.gambar();
+  int nilai = box.data;
+  print(nilai);
 }
 }</code></pre>
       </div>
 
-      <button onclick="openModal('https://dartpad.dev/?id=8f8a5dda6209b566648956376c3ef81c&run=true')">Run Program</button>
+      <button onclick="openModal('https://dartpad.dev/?id=5091416d83c8c24f70858bc9b49aa02c&run=true')">Run Program Succes</button>
+    
+<p class="label error"> Generic (Error)</p>
+  <p>
+    Pada contoh ini, program tetap menggunakan <b>generic</b>, tetapi terjadi kesalahan
+    karena data yang dimasukkan tidak sesuai dengan tipe yang telah ditentukan.
+  </p>
+
+  <p><b>Penjelasan:</b></p>
+  <ul>
+    <li>Tipe data sudah ditentukan sebagai <b>int</b></li>
+    <li>Namun data yang dimasukkan berupa <b>String</b></li>
+    <li>Terjadi ketidaksesuaian tipe data</li>
+    <li>Error langsung muncul sebelum program dijalankan (compile-time)</li>
+    <li>Ini menunjukkan bahwa generic lebih aman dibanding dynamic</li>
+  </ul>
+      
+       <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Box<T> {
+  T data;
+
+  Box(this.data);
+}
+
+void main() {
+  var box = Box<int>(10);
+
+  box.data = "halo"; // ERROR
+  print(box.data);
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=d056696714cf50a2bf2e8649e1f6cd92&run=true')">Run Program Error</button>
     </section>
 
     <section>
-      <h2>04. Manfaat Polimorfisme</h2>
+      <h2>04.Sintaks Generic Dasar</h2>
     <ul>
     <li><b>Fleksibilitas:</b> Program dapat digunakan untuk berbagai jenis objek</li>
     <li><b>Pengembangan mudah:</b> Penambahan tipe baru dapat dilakukan tanpa mengubah banyak kode</li>
