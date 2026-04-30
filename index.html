@@ -309,28 +309,83 @@
 
     <section>
   <h2>02. Masalah Tanpa Generic</h2>
-
- <p>
-    <b>Polimorfisme</b> berasal dari kata <i>poly</i> yang berarti banyak dan 
-    <i>morph</i> yang berarti bentuk, sehingga dapat diartikan sebagai “banyak bentuk”.
-  </p>
-
+      
+      <h2>Non Generic (Jalan)</h2>
   <p>
-    Konsep polimorfisme adalah objek dari subclass dapat diperlakukan sebagai 
-    objek dari superclass. Hal ini memungkinkan satu tipe data digunakan untuk 
-    berbagai objek yang berbeda.
+    Pada contoh ini, program masih menggunakan <b>dynamic</b> sehingga data bisa berupa apa saja.
+    Selama tipe data yang dimasukkan sesuai, program tetap bisa berjalan dengan normal.
   </p>
 
-  <p>
-    Sebagai contoh, Kucing, Anjing, dan Burung semuanya dapat dianggap sebagai Hewan.
-  </p>
-
-  <p><b>Tipe Polimorfisme:</b></p>
+  <p><b>Penjelasan:</b></p>
   <ul>
-    <li>Compile-time polymorphism: Method overloading (tidak didukung dalam Dart)</li>
-    <li>Runtime polymorphism: Method overriding (didukung dalam Dart)</li>
+    <li>Program berhasil dijalankan karena data yang digunakan adalah angka</li>
+    <li>Tipe data tidak ditentukan sejak awal</li>
+    <li>Masih berisiko jika terjadi perubahan tipe data</li>
+    <li>Kurang aman karena tidak ada pembatasan tipe</li>
   </ul>
+ <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Box {
+  dynamic data;
+
+  Box(this.data);
+}
+
+void main() {
+  var box = Box(10);
+
+  int nilai = box.data;
+  print(nilai);
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=1e3d898faa9651cb786ab70f46b3668e&run=true')">Run Program Succes</button>
+      
+  <h2>Non Generic (Terjadi Error)</h2>
+  <p>
+    Pada contoh ini, program masih menggunakan <b>dynamic</b> sehingga data bisa berupa tipe apa saja.
+    Namun, hal ini bisa menyebabkan masalah ketika tipe data yang digunakan tidak sesuai.
+  </p>
+
+  <p><b>Penjelasan:</b></p>
+  <ul>
+    <li>Data yang dimasukkan berupa <b>String</b> ("halo")</li>
+    <li>Data tersebut dipaksa menjadi <b>int</b></li>
+    <li>Terjadi ketidaksesuaian tipe data</li>
+    <li>Error baru muncul saat program dijalankan (runtime)</li>
+    <li>Ini menunjukkan bahwa penggunaan dynamic kurang aman</li>
+  </ul>
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class Box {
+  dynamic data;
+
+  Box(this.data);
+}
+
+void main() {
+  var box = Box("halo");
+
+  int nilai = box.data; // error
+  print(nilai);
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=3b63cf2dcb2e9c683879290c29f0b9ff&run=true')">Run Program Error</button>
+      
 </section>
+
+
       
     <section>
       <h2>03. Polimorfisme dengan Inheritance</h2>
