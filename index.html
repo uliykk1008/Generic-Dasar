@@ -486,14 +486,70 @@ void main() {
     </section>
 
     <section>
-      <h2>04.Sintaks Generic Dasar</h2>
-    <ul>
-    <li><b>Fleksibilitas:</b> Program dapat digunakan untuk berbagai jenis objek</li>
-    <li><b>Pengembangan mudah:</b> Penambahan tipe baru dapat dilakukan tanpa mengubah banyak kode</li>
-    <li><b>Penggunaan ulang kode:</b> Method yang sama dapat dimanfaatkan kembali dari class induk</li>
-    <li><b>Kemudahan perawatan:</b> Perubahan pada program lebih mudah dikelola</li>
+      <h2>04.Sintaks Generic Dasar dan contoh pada class&function</h2>
+  <p>
+    Dalam generic, digunakan <b>type parameter</b> seperti &lt;T&gt;, &lt;E&gt;, atau &lt;K, V&gt; 
+    untuk mewakili tipe data yang belum ditentukan. Tipe ini baru akan diketahui saat 
+    class atau function digunakan.
+  </p>
+
+  <p>
+    Penulisan type parameter biasanya mengikuti konvensi tertentu agar lebih mudah dipahami.
+  </p>
+
+  <p><b>Konvensi Penamaan:</b></p>
+  <ul>
+    <li><b>T</b> digunakan untuk menunjukkan tipe data secara umum</li>
+    <li><b>E</b> biasanya digunakan untuk elemen dalam struktur data seperti list</li>
+    <li><b>K</b> digunakan sebagai key (kunci)</li>
+    <li><b>V</b> digunakan sebagai value (nilai)</li>
+    <li><b>R</b> digunakan untuk tipe nilai kembalian (return)</li>
   </ul>
-</section>
+
+  <p>
+    Dengan menggunakan generic, kita dapat membuat class dan function yang lebih fleksibel 
+    karena dapat digunakan untuk berbagai jenis tipe data tanpa harus menuliskan ulang kode 
+    yang sama.
+  </p>
+  <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class MyClass<T> {
+  T data;
+  MyClass(this.data);
+
+  T getData() {
+    return data;
+  }
+}
+
+T myFunc<T>(T value) {
+  return value;
+}
+
+void main() {
+  // Class generic
+  var myIntClass = MyClass<int>(10);
+  var myStringClass = MyClass<String>('test');
+
+  print(myIntClass.getData());
+  print(myStringClass.getData());
+
+  // Function generic
+  var intValue = myFunc<int>(100);
+  var stringValue = myFunc<String>('hello');
+
+  print(intValue);
+  print(stringValue);
+}
+}</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=ecca3ae661f4fae5cf17e23fc5aedcf9&run=true')">Run Program </button>
+<section>
      
     <section>
       <h2>05. Is dan As Operator</h2>
