@@ -294,7 +294,7 @@
   <div class="stars"></div>
 
   <header>
-    <h1>GENERIC DI DART
+    <h1>GENERIC DI DART</h1>
     <p>Uliya Gumpari | 251410008 | Kelas: SI2A</p>
   </header>
 
@@ -327,10 +327,10 @@
     Analogi sederhananya generic seperti <b>cetakan kue</b> yang bisa digunakan untuk berbagai rasa 
     tanpa harus membuat cetakan baru setiap kali.
   </p>
-</section>
+ </section>
 
     <section>
-  <h2>02. Masalah Tanpa Generic</h2>
+      <h2>02. Masalah Tanpa Generic</h2>
       
      <p class="label success">Non Generic (Jalan)</p>
   <p>
@@ -363,12 +363,12 @@ void main() {
   int nilai = box.data;
   print(nilai);
 }
-}</code></pre>
+</code></pre>
       </div>
 
-      <button onclick="openModal('https://dartpad.dev/?id=1e3d898faa9651cb786ab70f46b3668e&run=true')">Run Program Succes</button>
-      
-<p class="label error">Non Generic (Error)</p>
+       <button onclick="showImage('Output1.jpg')">Lihat Output Succes</button>
+
+       <p class="label error">Non Generic (Error)</p>
   <p>
     Pada contoh ini, program masih menggunakan <b>dynamic</b> sehingga data bisa berupa tipe apa saja.
     Namun, hal ini bisa menyebabkan masalah ketika tipe data yang digunakan tidak sesuai.
@@ -403,12 +403,13 @@ void main() {
 }</code></pre>
       </div>
 
-      <button onclick="openModal('https://dartpad.dev/?id=3b63cf2dcb2e9c683879290c29f0b9ff&run=true')">Run Program Error</button>
+     <button onclick="showImage('Outpu2.jpg')">Lihat Output Error</button>
       
-</section>
- 
+    </section>
+
     <section>
-      <h2>03. Generic</h2>
+      
+<h2>03. Generic</h2>
     <p class="label success">Generic (Jalan)</p>
   <p>
     Pada contoh ini, program menggunakan <b>generic</b> sehingga tipe data sudah ditentukan sejak awal.
@@ -441,12 +442,11 @@ void main() {
   int nilai = box.data;
   print(nilai);
 }
-}</code></pre>
+</code></pre>
       </div>
 
-      <button onclick="openModal('https://dartpad.dev/?id=5091416d83c8c24f70858bc9b49aa02c&run=true')">Run Program Succes</button>
-    
-<p class="label error"> Generic (Error)</p>
+     <button onclick="showImage('Output3jpg')">Lihat Output Succes</button>
+     <p class="label error"> Generic (Error)</p>
   <p>
     Pada contoh ini, program tetap menggunakan <b>generic</b>, tetapi terjadi kesalahan
     karena data yang dimasukkan tidak sesuai dengan tipe yang telah ditentukan.
@@ -482,11 +482,11 @@ void main() {
 }</code></pre>
       </div>
 
-      <button onclick="openModal('https://dartpad.dev/?id=d056696714cf50a2bf2e8649e1f6cd92&run=true')">Run Program Error</button>
-    </section>
-
+      <button onclick="showImage('Outpu4jpg')">Lihat Output Error</button> 
     <section>
-      <h2>04.Sintaks Generic Dasar dan contoh pada class&function</h2>
+
+   <section>
+   <h2>04.Sintaks Generic Dasar dan contoh pada class&function</h2>
   <p>
     Dalam generic, digunakan <b>type parameter</b> seperti &lt;T&gt;, &lt;E&gt;, atau &lt;K, V&gt; 
     untuk mewakili tipe data yang belum ditentukan. Tipe ini baru akan diketahui saat 
@@ -549,48 +549,15 @@ void main() {
       </div>
 
       <button onclick="openModal('https://dartpad.dev/?id=ecca3ae661f4fae5cf17e23fc5aedcf9&run=true')">Run Program </button>
-<section>
-     
-    <section>
-      <h2>05. Is dan As Operator</h2>
-    <ul>
-    <li><b>is</b>: Untuk memeriksa jenis dari suatu objek</li>
-    <li><b>as</b>: Untuk mengubah atau menyesuaikan tipe objek</li>
-  </ul>
 
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-class Transportasi {}
-
-class Bus extends Transportasi {
-  void klakson() {
-    print('Bip bip!');
-  }
-}
-
-void main() {
-  Bus k = Bus();
-  k.klakson();
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=c4909569242e59f88b07e4dc6ead5c4d&run=true')">Run Program</button>
-    </section>
+</section>
 
      <section>
-      <h2>06. Praktik 1 Polimorfisme dengan List</h2>
-  <p>
-    Sebuah list dengan tipe parent dapat menyimpan berbagai objek dari subclass yang berbeda.
-  </p>
-
-  <p>
-    Ketika dilakukan perulangan, setiap objek akan menjalankan method sesuai dengan
-    implementasi yang dimilikinya masing-masing.
+      <h2> Sealed Class</h2>
+       <p>
+   Sealed class adalah class yang membatasi pewarisan hanya dalam satu file.
+Class ini digunakan untuk mengontrol subclass agar tidak dibuat sembarangan
+dan memastikan semua kemungkinan kondisi dalam program dapat ditangani dengan jelas.
   </p>
 
       <div class="code-container">
@@ -599,670 +566,646 @@ void main() {
 // NIM   : 251410008
 // Kelas : SI2A
 
-class Hewan {
-  void bersuara() {
-    print('Hewan bersuara');
-  }
+          //libsealed.dart
+sealed class ApiResponse {}
+
+class Success extends ApiResponse {
+  final String message;
+  Success(this.message);
 }
 
-class Kucing extends Hewan {
-  @override
-  void bersuara() => print('Meong');
-}
-
-class Anjing extends Hewan {
-  @override
-  void bersuara() => print('Guk guk');
-}
-
-class Burung extends Hewan {
-  @override
-  void bersuara() => print('Cuit cuit');
-}
-
-void main() {
-
-  List<Hewan> daftarHewan = [
-    Kucing(),
-    Anjing(),
-    Burung(),
-  ];
-
-  
-  for (var h in daftarHewan) {
-    h.bersuara();
-  }
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=931f7a6cab62040fc5c76f6b4951ac2d&run=true')">Run Program</button>
-    </section>
-
-       <section>
-  <h2>07.Pengantar Abstraksi</h2>
-
-  <p>
-    Abstraksi adalah konsep dalam Object Oriented Programming (OOP) yang digunakan
-    untuk menyembunyikan detail implementasi dan hanya menampilkan bagian penting
-    dari suatu objek kepada pengguna.
-  </p>
-
-  <p>
-    Dengan abstraksi, pengguna tidak perlu mengetahui bagaimana suatu proses bekerja,
-    tetapi cukup mengetahui apa yang dapat dilakukan oleh objek tersebut.
-  </p>
-
-  <p><b>Konsep Abstraksi:</b></p>
-  <ul>
-    <li>Menyederhanakan sistem dengan menyembunyikan detail yang tidak diperlukan</li>
-    <li>Menampilkan hanya fitur atau fungsi utama</li>
-    <li>Menggunakan abstract class atau interface</li>
-  </ul>
-
-  <p><b>Tujuan Abstraksi:</b></p>
-  <ul>
-    <li>Membuat kode lebih sederhana dan mudah dipahami</li>
-    <li>Mengurangi kompleksitas program</li>
-    <li>Meningkatkan keamanan dengan menyembunyikan detail internal</li>
-    <li>Mempermudah pengembangan dan perawatan kode</li>
-  </ul>
-
-  <p><b>Cara Menerapkan Abstraksi di Dart:</b></p>
-  <ul>
-    <li>Menggunakan <b>abstract class</b> untuk membuat kerangka dasar</li>
-    <li>Mendefinisikan <b>abstract method</b> tanpa isi</li>
-    <li>Mengimplementasikan method tersebut di class turunan</li>
-    <li>Menggunakan <b>implements</b> untuk membuat interface</li>
-  </ul>
-</section>
-
-    <section>
-      <h2>08. Abstract Class</h2>
-  <p>
-    Abstract class merupakan class yang berfungsi sebagai blueprint
-    dan hanya dapat digunakan melalui class turunannya.
-  </p>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-abstract class Kendaraan {
-  String? merk;
-
-  void start();
-
-  void stop() {
-    print('Kendaraan berhenti');
-  }
-}
-
-class Mobil extends Kendaraan {
-  @override
-  void start() {
-    print('Mobil $merk menyala');
-  }
-}
-
-void main() {
-  Mobil m = Mobil();
-  m.merk = "BMW"; // merk mobil
-  m.start();
-  m.stop();
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=a2351f34fa385e85f3c051728f13a8ed&run=true')">Run Program</button>
-    </section>
-
-    <section>
-      <h2>09. Abstract Method</h2>
-     <p>
-    Abstract method adalah method tanpa implementasi yang wajib
-    di-override oleh class turunannya.
-  </p>
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-          abstract class AlatMusik {
-  void mainkan();
-
-  void info() {
-    print('Ini adalah alat musik');
-  }
-}
-
-class Gitar extends AlatMusik {
-  @override
-  void mainkan() {
-    print('Jreng jreng...');
-  }
-}
-
-void main() {
-  Gitar g = Gitar();
-  g.info();
-  g.mainkan();
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=e74bc16f8d99cd6fcf9a93ed7aeb365d&run=true')">Run Program</button>
-    </section>
-
-    <section>
-      <h2>10.Interface di Dart </h2>
-  <p>
-    Interface di Dart adalah cara agar sebuah class memaksa class lain 
-    untuk mengimplementasikan method tertentu menggunakan <code>implements</code>.
-  </p>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-interface class Flyable {
-  void terbang() => print('Terbang...');
-}
-
-class KupuKupu implements Flyable {
-  @override
-  void terbang() => print('Kupu-kupu terbang indah');
-}
-
-class Drone implements Flyable {
-  @override
-  void terbang() => print('Drone terbang cepat');
-}
-
-void main() {
-  KupuKupu k = KupuKupu();
-  Drone d = Drone();
-
-  k.terbang();
-  d.terbang();
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=0dc7353cbec4f490fb7a532d17887bea&run=true')">Run Program</button>
-    </section>
-
-    <section>
-  <h2>11. Perbedaan Extends vs Implements di Dart</h2>
-
-  <p><strong>extends:</strong> Digunakan untuk mewarisi properti dan method dari class lain. Class turunan dapat menggunakan atau override method dari class induk.</p>
-
-  <p><strong>implements:</strong> Digunakan untuk memaksa class lain mengimplementasikan semua method dari class interface. Method harus di-override, tidak mewarisi implementasi.</p>
-</section>
-
-    <section>
-      <h2>12. Static Members dan Method</h2>
-      <p>
-    Static digunakan untuk membuat variabel atau method yang bisa diakses
-    tanpa membuat objek dari class. Biasanya dipanggil langsung dengan nama class.
-  </p>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-class MathUtils {
-  static double pi = 3.14;
-
-  static int add(int x, int y) {
-    return x + y;
-  }
-}
-
-void main() {
-  print('Nilai pi : ${MathUtils.pi}');
-  print('Result : ${MathUtils.add(10, 20)}');
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=b2345bcbd0536fd65f575b6a9b51a66c&run=true')">Run Program</button>
-    </section>
-       <section>
-      <h2>13. Praktik 2 Sistem Pembayaran</h2>
-     <p>
-    Sistem pembayaran adalah mekanisme yang digunakan untuk melakukan transaksi 
-    antara pembeli dan penjual, baik secara tunai maupun non-tunai seperti 
-    transfer bank, e-wallet, dan kartu kredit.
-  </p>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-abstract class MetodePembayaran {
-  void bayar(double jumlah);
-}
-
-class KartuKredit implements MetodePembayaran {
-  @override
-  void bayar(double jumlah) {
-    print('Bayar $jumlah dengan Kartu Kredit');
-  }
-}
-
-class EWallet implements MetodePembayaran {
-  @override
-  void bayar(double jumlah) {
-    print('Bayar $jumlah dengan E-Wallet');
-  }
-}
-
-class Tunai implements MetodePembayaran {
-  @override
-  void bayar(double jumlah) {
-    print('Bayar $jumlah dengan Tunai');
-  }
-}
-
-void main() {
-  MetodePembayaran m1 = KartuKredit();
-  MetodePembayaran m2 = EWallet();
-  MetodePembayaran m3 = Tunai();
-
-  m1.bayar(100000);
-  m2.bayar(50000);
-  m3.bayar(20000);
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=6832444a1db2638d731bcc62f0ddd175&run=true')">Run Program</button>
-    </section>
-
-    <section>
-      <h2>14. Studi Kasus : Sistem Bentuk Geometri</h2>
-    <p>
-    Sistem bentuk geometri digunakan untuk menghitung luas dan keliling 
-    berbagai bangun seperti persegi, lingkaran, dan segitiga dengan 
-    memanfaatkan konsep class dan method.
-  </p>
-       <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-abstract class Bentuk {
-  double hitungLuas();
-  double hitungKeliling();
-
-  void info() {
-    print('Luas: ${hitungLuas()}, Keliling: ${hitungKeliling()}');
-  }
-}
-
-class Persegi implements Bentuk {
-  double sisi;
-  Persegi(this.sisi);
-
-  @override
-  double hitungLuas() => sisi * sisi;
-
-  @override
-  double hitungKeliling() => 4 * sisi;
-
-  @override
-  void info() {
-    print(
-        'Persegi dengan sisi $sisi memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}');
-  }
-}
-
-class Lingkaran implements Bentuk {
-  double radius;
-  Lingkaran(this.radius);
-
-  @override
-  double hitungLuas() => 3.14 * radius * radius;
-
-  @override
-  double hitungKeliling() => 2 * 3.14 * radius;
-
-  @override
-  void info() {
-    print(
-        'Lingkaran dengan radius $radius memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}');
-  }
-}
-
-void main() {
-  Bentuk b1 = Persegi(4);
-  Bentuk b2 = Lingkaran(7);
-
-  b1.info();
-  b2.info();
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=21263836fbeb5a91e5557ef412c21776&run=true')">Run Program</button>
-    </section>
-
-    <section>
-  <h2>15. Kesimpulan</h2>
-
-  <p>
-    Polimorfisme memungkinkan objek digunakan dalam berbagai bentuk, 
-    sedangkan abstraksi membantu menyembunyikan detail implementasi. 
-    Keduanya membuat kode lebih fleksibel, terstruktur, dan mudah 
-    dikembangkan serta dipelihara.
-  </p>
-</section>
-
-      <section>
-  <h2>16.Bonus 1 : Class Pekerja </h2>
-<p>
-    Buat abstract atau interface class <b>Pekerja</b> dengan method <i>bekerja()</i>. 
-    Kemudian buat beberapa class seperti Programmer, Dokter, dan Guru yang 
-    mengimplementasikan method tersebut. Tampilkan hasilnya menggunakan konsep polimorfisme.
-  </p>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-abstract class Pekerja {
-  void bekerja(); // abstract
-
-  void info() {
-    print('Ini adalah pekerja');
-  }
-}
-
-class Programmer implements Pekerja {
-  @override
-  void bekerja() {
-    print('Programmer sedang coding');
-  }
-
-  @override
-  void info() {
-    print('Pekerja: Programmer');
-  }
-}
-
-class Dokter implements Pekerja {
-  @override
-  void bekerja() {
-    print('Dokter sedang memeriksa pasien');
-  }
-
-  @override
-  void info() {
-    print('Pekerja: Dokter');
-  }
-}
-
-class Guru implements Pekerja {
-  @override
-  void bekerja() {
-    print('Guru sedang mengajar');
-  }
-
-  @override
-  void info() {
-    print('Pekerja: Guru');
-  }
-}
-
-void main() {
-  List<Pekerja> daftar = [
-    Programmer(),
-    Dokter(),
-    Guru(),
-  ];
-
-  for (var p in daftar) {
-    p.info();
-    p.bekerja();
-    print('---');
-  }
-}
-}</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=0393ef45b97b16464ac91210e49731eb&run=true')">Run Program</button>
-    </section>
-
-  <section>
-  <h2>17. Bonus 2 : Class Tablet</h2>
-  <p>
-    Class Pekerja adalah konsep dalam pemrograman yang digunakan untuk 
-    merepresentasikan berbagai jenis pekerjaan dengan method yang sama, 
-    tetapi memiliki implementasi yang berbeda pada setiap turunannya.
-  </p>
-
-  <div class="code-container">
-    <div class="code-header">DART SOURCE CODE</div>
-<pre><code>// Nama  : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-class Komputer {
-  void mengetik() => print('Mengetik...');
-}
-
-class Kamera {
-  void foto() => print('Mengambil foto...');
-}
-
-class Telepon {
-  void telepon() => print('Menelpon...');
-}
-
-class Tablet implements Komputer, Kamera, Telepon {
-  @override
-  void mengetik() => print('Tablet bisa mengetik');
-
-  @override
-  void foto() => print('Tablet bisa foto');
-
-  @override
-  void telepon() => print('Tablet bisa telepon');
-}
-
-void main() {
-  Tablet t = Tablet();
-
-  t.mengetik();
-  t.foto();
-  t.telepon();
+class Error extends ApiResponse {
+  final String errorMessage;
+  Error(this.errorMessage);
 }
 </code></pre>
-  </div>
+      </div>
+ </section>
 
-  <button onclick="openModal('https://dartpad.dev/?id=f1a8c3b977a481a3894c5b4849856603&run=true')">Run Program</button>
-   </section>
+   <section>
+  <h2> Keuntungan Sealed Class</h2>
+  <ul>
+    <li>Membatasi pembuatan subclass hanya dalam satu file sehingga lebih terkontrol</li>
+    <li>Meningkatkan keamanan karena tidak semua class bisa mewarisi</li>
+    <li>Mempermudah penanganan kondisi dengan pattern matching</li>
+    <li>Mencegah kemungkinan kondisi yang tidak tertangani dalam program</li>
+  </ul>
 
-      <section>
-  <h2>18. Bonus 3 : Class Mathutils</h2>
-<p>
-    Class MathUtils adalah class yang berisi kumpulan method dan variabel static 
-    untuk melakukan operasi perhitungan matematika tanpa perlu membuat objek.
-  </p>
-
-  <div class="code-container">
-    <div class="code-header">DART SOURCE CODE</div>
-<pre><code>// Nama  : Uliya Gumpari
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
 // NIM   : 251410008
 // Kelas : SI2A
 
-import 'dart:math';
+import 'libsealed.dart';
 
-class MathUtils {
-
-  static int faktorial(int n) {
-    if (n <= 1) return 1;
-    return n * faktorial(n - 1);
-  }
-
-  static bool isPrima(int n) {
-    if (n < 2) return false;
-
-    for (int i = 2; i <= sqrt(n); i++) {
-      if (n % i == 0) return false;
-    }
-    return true;
-  }
-
-  static double roundDouble(double value, int decimal) {
-    double mod = pow(10, decimal).toDouble();
-    return (value * mod).round() / mod;
-  }
-
-  static int randomInt(int min, int max) {
-    return min + Random().nextInt(max - min + 1);
-  }
-
-  static double randomDouble(double min, double max) {
-    return min + Random().nextDouble() * (max - min);
-  }
-
-  static double rataRata(List<num> data) {
-    return data.reduce((a, b) => a + b) / data.length;
-  }
-
-  static double median(List<num> data) {
-    var sorted = List<num>.from(data)..sort();
-    int n = sorted.length;
-
-    if (n % 2 == 1) {
-      return sorted[n ~/ 2].toDouble();
-    } else {
-      return (sorted[n ~/ 2 - 1] + sorted[n ~/ 2]) / 2;
-    }
+void handleResponse(ApiResponse response) {
+  if (response is Success) {
+    print("Success: ${response.message}");
+  } else if (response is Error) {
+    print("Error: ${response.errorMessage}");
   }
 }
 
 void main() {
-  print(MathUtils.faktorial(5));
-  print(MathUtils.isPrima(7));
-  print(MathUtils.roundDouble(3.14159, 2));
-  print(MathUtils.randomInt(1, 10));
-  print(MathUtils.randomDouble(1, 5));
-  print(MathUtils.rataRata([1, 2, 3, 4]));
-  print(MathUtils.median([1, 2, 3, 4, 5]));
+  handleResponse(Success("Selamat datang Uliya"));
+  handleResponse(Error("Password salah"));
 }
 </code></pre>
-  </div>
+      </div>
 
-  <button onclick="openModal('https://dartpad.dev/?id=afa267be283fff316ebe654a6fe027c5&run=true')">Run Program</button>
-   </section>
 
-        <section>
-  <h2>19. Challenge</h2>
+
+    <button onclick="showImage('Output1.jpg')">Lihat Output Succes</button>
 <p>
-    Sistem ini menggunakan abstract class <b>MediaPlayer</b> sebagai dasar, 
-    serta interface <b>Playable</b> dan <b>Pausable</b> untuk mengatur fungsi. 
-    Class <b>AudioPlayer</b> dan <b>VideoPlayer</b> mengimplementasikan 
-    fitur tersebut sesuai kebutuhan.
-  </p>
-  <div class="code-container">
-    <div class="code-header">DART SOURCE CODE</div>
-<pre><code>// Nama  : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-abstract class MediaPlayer {
-  void load(String file);
-}
-
-abstract class Playable {
-  void play();
-}
-
-abstract class Pausable {
-  void pause();
-}
-
-class AudioPlayer extends MediaPlayer implements Playable, Pausable {
-  String? file;
-
-  @override
-  void load(String file) {
-    this.file = file;
-    print('Audio dimuat: $file');
-  }
-
-  @override
-  void play() {
-    print('Audio diputar');
-  }
-
-  @override
-  void pause() {
-    print('Audio dijeda');
-  }
-}
-
-class VideoPlayer extends MediaPlayer implements Playable, Pausable {
-  String? file;
-
-  @override
-  void load(String file) {
-    this.file = file;
-    print('Video dimuat: $file');
-  }
-
-  @override
-  void play() {
-    print('Video diputar');
-  }
-
-  @override
-  void pause() {
-    print('Video dijeda');
-  }
-}
-
-void main() {
-  List<MediaPlayer> players = [
-    AudioPlayer(),
-    VideoPlayer(),
-  ];
-
-  for (var p in players) {
-    p.load('file.mp3 / file.mp4');
-
-    if (p is Playable) {
-      p.play();
-    }
-    if (p is Pausable) {
-      p.pause();
-    }
-
-    print('---');
-  }
-}
-</code></pre>
-  </div>
-
-  <button onclick="openModal('https://dartpad.dev/?id=b293ae1ba2deaae0f47e85954c1a3fd3&run=true')">Run Program</button>
-   </section>
-
-
+Error sealed class terjadi karena class tersebut hanya boleh di-extend
+di file yang sama. Jika dibuat di file berbeda, maka akan muncul error.
+</p>
     
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'libsealed.dart';
+
+// ERROR: mencoba membuat subclass di file berbeda
+class Loading extends ApiResponse {
+  final String info;
+  Loading(this.info);
+}
+
+void main() {}
+</code></pre>
+      </div>
+
+    <button onclick="showImage('Output6.jpg')">Lihat Output Error</button>
+    </section>
+
+    <section>
+  <h2> Base Class</h2>  <p>
+    Base class adalah class yang hanya bisa diwariskan menggunakan extends
+    dan tidak dapat diimplementasikan secara bebas di luar library.
+    Class ini digunakan untuk mengontrol pewarisan agar tetap terstruktur.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+//libbase.dart
+base class Animal {
+  void speak() {}
+}
+</code></pre>
+      </div>
+    </section>
+
+<section>
+  <h2> Kapan Menggunakan Base Class</h2> 
+  </p>  <p><b>Kapan digunakan:</b></p>
+  <ul>
+    <li>Saat ingin membatasi pewarisan hanya dengan extends</li>
+    <li>Saat ingin menjaga struktur class tetap konsisten</li>
+    <li>Saat ingin mencegah penggunaan implements yang tidak sesuai</li>
+    <li>Saat membutuhkan kontrol penuh terhadap class turunan</li>
+  </ul>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'libbase.dart';
+
+base class Chicken extends Animal {
+  @override
+  void speak() {
+    print("Kukuruyuk!");
+  }
+}
+
+base class Goat extends Animal {
+  @override
+  void speak() {
+    print("Mbeeek!");
+  }
+}
+
+void main() {
+  Animal chicken = Chicken();
+  chicken.speak();
+
+  Animal goat = Goat();
+  goat.speak();
+}
+</code></pre>
+      </div>
+
+    <button onclick="showImage('Output2.jpg')">Lihat Output Succes</button>
+    <p>
+Error ini muncul karena base class tidak bisa di-implements.
+Class tersebut hanya boleh menggunakan extends, bukan implements.
+</p>
+
+    <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'libbase.dart';
+
+// ERROR: mencoba implements base class dari file berbeda
+class SmallAnimal implements Animal {
+  @override
+  void speak() {
+    print("Suara kecil");
+  }
+}
+
+void main() {}
+</code></pre>
+      </div>
+
+    <button onclick="showImage('Output7.jpg')">Lihat Output Error</button>
+    </section>
+    
+     <section>
+      <h2> Final Class</h2>
+       <p>  Final class adalah class yang tidak dapat diwariskan atau di-extend oleh class lain.
+    Final class digunakan ketika sebuah class tidak ingin diwariskan agar implementasi tetap
+        aman dan tidak diubah oleh class lain.
+     </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+          //libfinal.dart
+final class Settings {
+  final String theme;
+  final int fontSize;
+
+  Settings({required this.theme, required this.fontSize});
+
+  void showSettings() {
+    print("Theme: $theme, Font Size: $fontSize");
+  }
+}
+
+base class CustomSettings extends Settings {
+  CustomSettings(String theme, int fontSize)
+      : super(theme: theme, fontSize: fontSize);
+}
+</code></pre>
+      </div>
+ </section>
+    
+    <section>
+      <h2>  Penggunaan Final Class</h2>
+      <p>
+    Class final hanya dapat dipakai langsung,tidak dapat
+        secara dari luar.
+  </p>
+  <p><b>Kegunaan:</b></p>
+  <ul>
+    <li>Mencegah class digunakan sebagai parent</li>
+    <li>Menjaga implementasi agar tidak diubah oleh subclass</li>
+    <li>Meningkatkan keamanan dan kestabilan kode</li>
+  </ul>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+import 'libfinal.dart';
+
+void main() {
+  Settings settings = Settings(theme: "Dark", fontSize: 18);
+  settings.showSettings();
+
+  CustomSettings custom = CustomSettings("Dark", 18);
+  custom.showSettings();
+}
+</code></pre>
+      </div>
+
+    <button onclick="showImage('Output3.jpg')">Lihat Output Succes</button>
+    <p>
+Kesalahan ini terjadi karena final class tidak dapat digunakan
+untuk extends maupun implements. Class tersebut hanya bisa
+digunakan secara langsung tanpa diturunkan.
+</p>
+
+    <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+import 'libfinal.dart';
+
+// ERROR: mencoba extend final class
+class AdvancedSettings extends Settings {
+  AdvancedSettings(String theme, int fontSize)
+      : super(theme: theme, fontSize: fontSize);
+}
+
+void main() {}
+</code></pre>
+      </div>
+
+    <button onclick="showImage('Output8.jpg')">Lihat Output Error</button>
+     </section>
+
+    <section>
+      <h2>. Perbandingan Class Modifers</h2>
+      <table border="1" cellpadding="8">
+    <tr>
+      <th>Modifier</th>
+      <th>Deskripsi</th>
+    </tr>
+    <tr>
+      <td>abstract</td>
+      <td>Tidak bisa dibuat objek langsung, digunakan sebagai dasar class</td>
+    </tr>
+    <tr>
+      <td>base</td>
+      <td>Hanya dapat diwariskan dalam library yang sama</td>
+    </tr>
+    <tr>
+      <td>interface</td>
+      <td>Digunakan sebagai kontrak yang harus diimplementasikan</td>
+    </tr>
+    <tr>
+      <td>final</td>
+      <td>Tidak dapat diwariskan atau di-extend</td>
+    </tr>
+    <tr>
+      <td>sealed</td>
+      <td>Membatasi subclass hanya dalam file yang sama</td>
+    </tr>
+  </table>
+</section>
+
+    <section>
+      <h2> Praktik 1 Sealed Class dengan Pattern Matching</h2>
+      <p>
+    Sealed class memungkinkan kita mengetahui semua kemungkinan subclass
+    yang ada dalam satu file.
+  </p>
+
+  <p>
+    Dengan pattern matching, setiap kemungkinan tersebut dapat diperiksa
+    dan ditangani secara spesifik sesuai jenis objeknya.
+  </p>
+
+  <p>
+    Hal ini membuat kode lebih aman karena semua kondisi dapat ditangani
+    tanpa ada yang terlewat.
+  </p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+sealed class Status {}
+
+class Loading extends Status {}
+
+class Loaded extends Status {
+  final String data;
+  Loaded(this.data);
+}
+
+class Failed extends Status {
+  final String error;
+  Failed(this.error);
+}
+
+void handleStatus(Status status) {
+  switch (status) {
+    case Loading():
+      print('Loading...');
+    case Loaded(:final data):
+      print('Data: $data');
+    case Failed(:final error):
+      print('Error: $error');
+  }
+}
+
+void main() {
+  print("=== SEALED PATTERN ===");
+
+  handleStatus(Loading());
+  handleStatus(Loaded("Data berhasil"));
+  handleStatus(Failed("Terjadi kesalahan"));
+}
+</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=29ce249c5f745e040eff43395bfded69&run=true')">Run Program</button>
+    </section>
+
+       <section>
+      <h2> Sistem State Management</h2>
+        <p>
+    State management adalah cara mengatur kondisi aplikasi seperti loading, success, dan error.
+    Dengan sealed class, setiap state dapat didefinisikan dengan jelas.
+  </p>  <p><b>Fitur:</b></p>
+  <ul>
+    <li>Mengelola kondisi aplikasi</li>
+    <li>Mengatur alur program</li>
+  </ul>  <p><b>Kenapa digunakan:</b></p>
+  <ul>
+    <li>Agar kondisi aplikasi lebih terstruktur</li>
+    <li>Mencegah error yang tidak ter-handle</li>
+  </ul>  <p><b>Batasan:</b></p>
+  <ul>
+    <li>Bisa menjadi kompleks jika state terlalu banyak</li>
+  </ul>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// Nim    : 251410008
+// Kelas  : SI2A
+
+sealed class AppState {}
+
+class LoadingState extends AppState {}
+
+class SuccessState extends AppState {
+  final List<String> items;
+  SuccessState(this.items);
+}
+
+class ErrorState extends AppState {
+  final String message;
+  ErrorState(this.message);
+}
+
+void updateUI(AppState state) {
+  switch (state) {
+    case LoadingState():
+      print('Loading...');
+    case SuccessState(:final items):
+      print('Success: $items');
+    case ErrorState(:final message):
+      print('Error: $message');
+  }
+}
+
+void main() {
+  print("=== APP STATE ===");
+
+  updateUI(LoadingState());
+  updateUI(SuccessState(["A", "B"]));
+  updateUI(ErrorState("Gagal"));
+}
+</code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=433210ab2c6246f38cbd5bc505b64eb7&run=true')">Run Program</button>
+    </section>
+
+    <section>
+      <h2> Ringkasan & Best Practices</h2>
+      <p><b>Ringkasan:</b></p>
+  <ul>
+    <li>Sealed class digunakan untuk membatasi hierarki dan mendukung pattern matching</li>
+    <li>Base class digunakan sebagai dasar class yang hanya dapat di-extend</li>
+    <li>Final class digunakan untuk mencegah pewarisan dari luar</li>
+  </ul>
+
+  <p><b>Best Practices:</b></p>
+  <ul>
+    <li>Gunakan sealed class untuk state atau kondisi yang jumlahnya terbatas</li>
+    <li>Gunakan base class untuk membuat kerangka dasar program</li>
+    <li>Gunakan final class untuk class yang tidak ingin diubah atau diwariskan</li>
+  </ul>
+</section>
+
+      <section>
+  <h2> Bonus Base Class Repository</h2>
+      <p>
+        Repository menggunakan base class agar hanya bisa diwariskan menggunakan extends,
+    bukan diimplementasikan sembarangan.<p>
+  Penggunaan base atau abstract class bertujuan untuk mencegah implementasi langsung
+  yang tidak sesuai, sehingga hanya class turunan yang mengikuti aturan yang dapat digunakan.
+</p>
+  </p>  <p><b>Fitur Base Class pada Repository:</b></p>
+  <ul>
+    <li>Hanya bisa diwariskan dengan extends</li>
+    <li>Tidak bisa digunakan dengan implements di luar library</li>
+    <li>Menjaga struktur method tetap sama</li>
+    
+     <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+          
+ // repository.dart
+base class Repository {
+  void create(String data) {
+    print("Create data: $data");
+  }
+
+  void read() {
+    print("Read data");
+  }
+
+  void update(String data) {
+    print("Update data: $data");
+  }
+
+  void delete(String data) {
+    print("Delete data: $data");
+  }
+}
+   </code></pre>
+      </div>
+  </ul>  <p><b>Kenapa menggunakan base:</b></p>
+  <ul>
+    <li>Menjaga struktur CRUD tetap konsisten</li>
+    <li>Mencegah implementasi yang tidak sesuai</li>
+    <li>Membatasi penggunaan class agar lebih terkontrol</li>
+  </ul>  <p><b>Batasan:</b></p>
+  <ul>
+    <li>Tidak bisa diimplementasikan menggunakan implements</li>
+  </ul>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'repository.dart';
+
+base class UserRepository extends Repository {
+  @override
+  void create(String data) {
+    print("User created: $data");
+  }
+}
+
+void main() {
+  var repo = UserRepository();
+  repo.create("Uliya Gumpari");
+  repo.read();
+  repo.update("Data Baru");
+  repo.delete("Data Lama");
+}
+</code></pre>
+      </div>
+      
+      <button onclick="showImage('Output4.jpg')">Lihat Output Succes</button>
+      <p>
+Contoh berikut menunjukkan kesalahan dalam penggunaan base class,
+yaitu menggunakan implements serta method yang tidak sesuai
+dengan class induknya.
+</p>
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'repository.dart';
+
+// ERROR
+base class UliyaRepository implements Repository {
+  @override
+  void create(String data) {
+    print("Data dibuat oleh Uliya: $data");
+  }
+
+  @override
+  void read() {
+    print("Menampilkan data Uliya");
+  }
+
+  @override
+  void update(int id) { // ❌ kurang parameter (harusnya ada String data)
+    print("Update id: $id");
+  }
+
+  @override
+  void delete(String id) { // ❌ tipe data salah (harusnya int)
+    print("Hapus id: $id");
+  }
+}
+
+void main() {}
+</code></pre>
+      </div>
+      
+      <button onclick="showImage('Output9.jpg')">Lihat Output Error</button>
+    </section>
+
+    <section>
+  <h2> Bonus Final Class MathUtils</h2>
+<p>
+    MathUtils menggunakan final class karena hanya berisi fungsi utilitas
+    dan tidak perlu diwariskan ke class lain.<p>
+  Penggunaan final class bertujuan untuk memastikan bahwa class ini tidak dapat diwariskan
+  sehingga fungsi di dalamnya tetap aman dan tidak diubah oleh class lain.
+</p>
+  </p>  <p><b>Fitur Final Class pada MathUtils:</b></p>
+  <ul>
+    <li>Tidak bisa di-extend oleh class lain</li>
+    <li>Tidak bisa diimplementasikan</li>
+    <li>Cocok untuk method static</li>
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+ // math_utils.dart
+final class MathUtils {
+  static int tambah(int a, int b) {
+    return a + b;
+  }
+
+  static int kurang(int a, int b) {
+    return a - b;
+  }
+
+  static int kali(int a, int b) {
+    return a * b;
+  }
+
+  static double bagi(int a, int b) {
+    return a / b;
+  }
+}
+   </code></pre>
+      </div>
+  </ul>  <p><b>Kenapa menggunakan final:</b></p>
+  <ul>
+    <li>Mencegah class diwariskan</li>
+    <li>Menjaga fungsi tetap sederhana dan aman</li>
+    <li>Menghindari perubahan dari subclass</li>
+  </ul>  <p><b>Batasan:</b></p>
+  <ul>
+    <li>Tidak bisa diwariskan sama sekali</li>
+  </ul>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+import 'math_utils.dart';
+
+void main() {
+  print(MathUtils.tambah(10, 5));
+  print(MathUtils.kurang(10, 5));
+  print(MathUtils.kali(10, 5));
+  print(MathUtils.bagi(10, 5));
+}
+</code></pre>
+      </div>
+      
+      <button onclick="showImage('Output5.jpg')">Lihat Output Succes</button>
+      <p>
+Error ini terjadi karena class bertipe final tidak dapat diturunkan
+oleh class lain. MathUtils hanya bisa digunakan secara langsung
+tanpa menggunakan extends.
+</p>
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+
+import 'math_utils.dart';
+
+// ERROR
+class UliyaMath extends MathUtils {}
+
+void main() {}
+</code></pre>
+      </div>
+      
+      <button onclick="showImage('Output10.jpg')">Lihat Output Error</button>
+    </section>
 
   </div>
 
@@ -1298,11 +1241,23 @@ void main() {
       document.body.style.overflow = "hidden";
     }
 
+    function showImage(img) {
+  document.getElementById("modal").style.display = "block";
+  document.getElementById("dartFrame").outerHTML =
+    `<img src="${img}" style="width:100%; height:100%; object-fit:contain;">`;
+  document.body.style.overflow = "hidden";
+}
+
     function closeModal() {
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("dartFrame").src = "";
-      document.body.style.overflow = "auto";
-    }
+  document.getElementById("modal").style.display = "none";
+
+  document.querySelector(".modal-content").innerHTML = `
+    <span class="close" onclick="closeModal()">&times;</span>
+    <iframe id="dartFrame" src=""></iframe>
+  `;
+
+  document.body.style.overflow = "auto";
+}
 
     window.onclick = function (e) {
       if (e.target == document.getElementById("modal")) closeModal();
@@ -1323,4 +1278,3 @@ void main() {
 </body>
 
 </html>
-
