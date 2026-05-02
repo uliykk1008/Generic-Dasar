@@ -550,12 +550,13 @@ void main() {
 </section>
 
      <section>
-      <h2> Sealed Class</h2>
-       <p>
-   Sealed class adalah class yang membatasi pewarisan hanya dalam satu file.
-Class ini digunakan untuk mengontrol subclass agar tidak dibuat sembarangan
-dan memastikan semua kemungkinan kondisi dalam program dapat ditangani dengan jelas.
-  </p>
+  <h2>Contoh Kelas Box&lt;T&gt;</h2>
+  <p>Box&lt;T&gt; menyimpan data dengan tipe fleksibel.</p>
+  <p>T ditentukan saat object dibuat.</p>
+
+  <p>Contoh:</p>
+  <p>Box&lt;int&gt;(10)</p>
+  <p>Box&lt;String&gt;("Hello")</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -563,61 +564,166 @@ dan memastikan semua kemungkinan kondisi dalam program dapat ditangani dengan je
 // NIM   : 251410008
 // Kelas : SI2A
 
-          //libsealed.dart
-sealed class ApiResponse {}
+          class Box<T> {
+  T? _value; // nullable
 
-class Success extends ApiResponse {
-  final String message;
-  Success(this.message);
-}
+  Box(this._value);
 
-class Error extends ApiResponse {
-  final String errorMessage;
-  Error(this.errorMessage);
-}
-</code></pre>
-      </div>
- </section>
+  T? get value => _value;
 
-   <section>
-  <h2> Keuntungan Sealed Class</h2>
-  <ul>
-    <li>Membatasi pembuatan subclass hanya dalam satu file sehingga lebih terkontrol</li>
-    <li>Meningkatkan keamanan karena tidak semua class bisa mewarisi</li>
-    <li>Mempermudah penanganan kondisi dengan pattern matching</li>
-    <li>Mencegah kemungkinan kondisi yang tidak tertangani dalam program</li>
-  </ul>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-import 'libsealed.dart';
-
-void handleResponse(ApiResponse response) {
-  if (response is Success) {
-    print("Success: ${response.message}");
-  } else if (response is Error) {
-    print("Error: ${response.errorMessage}");
+  void setValue(T value) {
+    _value = value;
   }
 }
 
 void main() {
-  handleResponse(Success("Selamat datang Uliya"));
-  handleResponse(Error("Password salah"));
+  // INT
+  var intBox = Box<int>(10);
+  print('Int Box Value: ${intBox.value}');
+  intBox.setValue(20);
+  print('Int Box Value After Set: ${intBox.value}');
+
+  // STRING
+  var stringBox = Box<String>('Hello, Generic!');
+  print('String Box Value: ${stringBox.value}');
+  stringBox.setValue('Hello World');
+  print('String Box Value After Set: ${stringBox.value}');
+
+  // DOUBLE
+  var doubleBox = Box<double>(3.14);
+  print('Double Box Value: ${doubleBox.value}');
+}
+ </code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=62ca5d5512522cfe3367d8cf4a296ade&run=true')">Run Program </button>
+ </section>
+    
+    <section>
+  <h2>Pair&lt;K, V&gt;</h2>
+
+  <p>Pair&lt;K, V&gt; menyimpan dua data dengan tipe berbeda.</p>
+  <p>K = tipe untuk key, V = tipe untuk value.</p>
+
+  <p>Contoh:</p>
+  <p>Pair&lt;String, int&gt; ("age", 30)</p>
+  <p>Pair&lt;String, String&gt; ("name", "Alice")</p>
+
+  <p>Intinya: fleksibel dan type-safe.</p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+         class Pair<K, V> {
+  K key;
+  V value;
+
+  Pair(this.key, this.value);
+
+  void printPair() {
+    print('Key: $key, Value: $value');
+  }
+}
+
+void main() {
+  // Pair dengan tipe data String dan int
+  var pair1 = Pair<String, int>('age', 30);
+  pair1.printPair(); // Output: Key: age, Value: 30
+
+  // Pair dengan tipe data String dan String
+  var pair2 = Pair<String, String>('name', 'Alice');
+  pair2.printPair(); // Output: Key: name, Value: Alice
+
+  // Pair dengan tipe data int dan double
+  var pair3 = Pair<int, double>(1, 2.71);
+  pair3.printPair(); // Output: Key: 1, Value: 2.71
+}
+ </code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=58577a7ab8123dc71b5f46e6f9e56578&run=true')">Run Program </button>
+ </section>
+
+     <section>
+ <section>
+  <h2>combine&lt;T, U&gt;</h2>
+
+  <p>Fungsi generic untuk menggabungkan dua nilai dengan tipe berbeda.</p>
+  <p>T = tipe value1, U = tipe value2.</p>
+
+  <p>Contoh:</p>
+  <p>combine&lt;String, int&gt; ("Number is", 10)</p>
+  <p>combine&lt;int, double&gt; (10, 20.5)</p>
+
+  <p>Intinya: fleksibel untuk berbagai tipe data.</p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+        String combine<T, U>(T value1, U value2) {
+  return '$value1, $value2';
+}
+
+void main() {
+  var result1 = combine<String, int>('Number is', 10);
+  print(result1); // Output: Number is, 10
+
+  var result2 = combine<int, double>(10, 20.5);
+  print(result2); // Output: 10, 20.5
+}
+ </code></pre>
+      </div>
+
+      <button onclick="openModal('https://dartpad.dev/?id=9f475b225a949ff347b2664de33b15be&run=true')">Run Program </button>
+ </section>
+
+   <section>
+  <h2>Generic dengan extends (Success)</h2>
+      <p class="label success"> Generic Extends (Jalan)</p>
+
+  <p>Menggunakan tipe yang sesuai dengan batasan &lt;T extends num&gt;.</p>
+  <p>int dan double termasuk turunan dari num.</p>
+  <p>Program berjalan tanpa error.</p>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+class NumberBox<T extends num> {
+  T value;
+
+  NumberBox(this.value);
+
+  T getValue() {
+    return value;
+  }
+}
+
+void main() {
+  var intBox = NumberBox<int>(10);
+  print("int box value: ${intBox.getValue()}");
+
+  var doubleBox = NumberBox<double>(3.14);
+  print("double box value: ${doubleBox.getValue()}");
 }
 </code></pre>
       </div>
 
+    <button onclick="showImage('Output5.jpg')">Lihat Output Succes</button>
+     
+ <p class="label Error"> Generic Extends (Error)</p>
 
-
-    <button onclick="showImage('Output1.jpg')">Lihat Output Succes</button>
-<p>
-Error sealed class terjadi karena class tersebut hanya boleh di-extend
-di file yang sama. Jika dibuat di file berbeda, maka akan muncul error.
-</p>
+  <p>Menggunakan tipe yang tidak sesuai dengan batasan.</p>
+  <p>String bukan turunan dari num.</p>
+  <p>Akan terjadi error saat compile.</p>
     
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -625,15 +731,20 @@ di file yang sama. Jika dibuat di file berbeda, maka akan muncul error.
 // NIM   : 251410008
 // Kelas : SI2A
 
-import 'libsealed.dart';
+class NumberBox<T extends num> {
+  T value;
 
-// ERROR: mencoba membuat subclass di file berbeda
-class Loading extends ApiResponse {
-  final String info;
-  Loading(this.info);
+  NumberBox(this.value);
+
+  T getValue() {
+    return value;
+  }
 }
 
-void main() {}
+void main() {
+  var stringBox = NumberBox<String>('test'); // ❌ ERROR
+  print(stringBox.getValue());
+}
 </code></pre>
       </div>
 
@@ -641,11 +752,16 @@ void main() {}
     </section>
 
     <section>
-  <h2> Base Class</h2>  <p>
-    Base class adalah class yang hanya bisa diwariskan menggunakan extends
-    dan tidak dapat diimplementasikan secara bebas di luar library.
-    Class ini digunakan untuk mengontrol pewarisan agar tetap terstruktur.
-  </p>
+  <h2>Type Inference (Inferensi Tipe)</h2>
+
+  <p>Dart dapat menebak tipe generic secara otomatis dari nilai yang diberikan.</p>
+  <p>Tidak perlu menuliskan tipe secara manual.</p>
+
+  <p>Contoh:</p>
+  <p>myFunc(10) → int</p>
+  <p>myFunc("test") → String</p>
+
+  <p>Program berjalan tanpa error.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -653,12 +769,21 @@ void main() {}
 // NIM   : 251410008
 // Kelas : SI2A
 
-//libbase.dart
-base class Animal {
-  void speak() {}
+T myFunc<T>(T value) {
+  return value;
+}
+
+void main() {
+  var intValue = myFunc(10); // infer: int
+  print(intValue.runtimeType); // Output: int
+
+  var stringValue = myFunc("test"); // infer: String
+  print(stringValue.runtimeType); // Output: String
 }
 </code></pre>
       </div>
+      
+      <button onclick="openModal('https://dartpad.dev/?id=77e1354914a1ca49d3d9f292f0bd5b15&run=true')">Run Program </button>
     </section>
 
 <section>
