@@ -717,7 +717,7 @@ void main() {
       </div>
 
     <button onclick="showImage('Output5.jpg')">Lihat Output Succes</button>
-     <p class="label error"> Generic (Error)</p>
+     <p class="label error"> Generic Extends(Error)</p>
 
   <p>Menggunakan tipe yang tidak sesuai dengan batasan.</p>
   <p>String bukan turunan dari num.</p>
@@ -805,7 +805,7 @@ void main() {
   <p>Hanya tipe tertentu yang boleh digunakan.</p>
   <p>Membuat kode lebih aman dan sesuai aturan.</p>
   
-   <p class="label success"> Generic Extends (Jalan)</p>
+   <p class="label success"> (Jalan)</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -827,7 +827,7 @@ void main() {
       </div>
 
     <button onclick="showImage('Output7.jpg')">Lihat Output Succes</button>
-   <p class="label error"> Generic (Error)</p>
+   <p class="label error">  (Error)</p>
 
     <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -1027,53 +1027,9 @@ int hasil = data as int;
 </code></pre>
       </div>
      </section>
-
+   
     <section>
-      <h2>. Perbandingan Class Modifers</h2>
-      <table border="1" cellpadding="8">
-    <tr>
-      <th>Modifier</th>
-      <th>Deskripsi</th>
-    </tr>
-    <tr>
-      <td>abstract</td>
-      <td>Tidak bisa dibuat objek langsung, digunakan sebagai dasar class</td>
-    </tr>
-    <tr>
-      <td>base</td>
-      <td>Hanya dapat diwariskan dalam library yang sama</td>
-    </tr>
-    <tr>
-      <td>interface</td>
-      <td>Digunakan sebagai kontrak yang harus diimplementasikan</td>
-    </tr>
-    <tr>
-      <td>final</td>
-      <td>Tidak dapat diwariskan atau di-extend</td>
-    </tr>
-    <tr>
-      <td>sealed</td>
-      <td>Membatasi subclass hanya dalam file yang sama</td>
-    </tr>
-  </table>
-</section>
-
-    <section>
-      <h2> Praktik 1 Sealed Class dengan Pattern Matching</h2>
-      <p>
-    Sealed class memungkinkan kita mengetahui semua kemungkinan subclass
-    yang ada dalam satu file.
-  </p>
-
-  <p>
-    Dengan pattern matching, setiap kemungkinan tersebut dapat diperiksa
-    dan ditangani secara spesifik sesuai jenis objeknya.
-  </p>
-
-  <p>
-    Hal ini membuat kode lebih aman karena semua kondisi dapat ditangani
-    tanpa ada yang terlewat.
-  </p>
+      <h2> Studi Kasus - Cache Generic</h2>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -1081,121 +1037,68 @@ int hasil = data as int;
 // Nim    : 251410008
 // Kelas  : SI2A
 
-sealed class Status {}
+// Generic Cache Class
+class Cache<T> {
+  final Map<String, T> _storage = {};
 
-class Loading extends Status {}
+  void set(String key, T value) {
+    _storage[key] = value;
+  }
 
-class Loaded extends Status {
-  final String data;
-  Loaded(this.data);
+  T? get(String key) {
+    return _storage[key];
+  }
+
+  void remove(String key) {
+    _storage.remove(key);
+  }
 }
 
-class Failed extends Status {
-  final String error;
-  Failed(this.error);
-}
+// Contoh class Product
+class Product {
+  String name;
+  int price;
 
-void handleStatus(Status status) {
-  switch (status) {
-    case Loading():
-      print('Loading...');
-    case Loaded(:final data):
-      print('Data: $data');
-    case Failed(:final error):
-      print('Error: $error');
+  Product(this.name, this.price);
+
+  @override
+  String toString() {
+    return '$name - $price';
   }
 }
 
 void main() {
-  print("=== SEALED PATTERN ===");
+  // Cache untuk String
+  var userCache = Cache<String>();
+  userCache.set('name', 'Uliya');
+  print(userCache.get('name'));
 
-  handleStatus(Loading());
-  handleStatus(Loaded("Data berhasil"));
-  handleStatus(Failed("Terjadi kesalahan"));
+  // Cache untuk Product
+  var productCache = Cache<Product>();
+  productCache.set('p1', Product('Laptop', 1000));
+
+  print(productCache.get('p1'));
+
+  // Hapus data
+  productCache.remove('p1');
+  print(productCache.get('p1')); // null
 }
 </code></pre>
       </div>
 
-      <button onclick="openModal('https://dartpad.dev/?id=29ce249c5f745e040eff43395bfded69&run=true')">Run Program</button>
-    </section>
-
-       <section>
-      <h2> Sistem State Management</h2>
-        <p>
-    State management adalah cara mengatur kondisi aplikasi seperti loading, success, dan error.
-    Dengan sealed class, setiap state dapat didefinisikan dengan jelas.
-  </p>  <p><b>Fitur:</b></p>
-  <ul>
-    <li>Mengelola kondisi aplikasi</li>
-    <li>Mengatur alur program</li>
-  </ul>  <p><b>Kenapa digunakan:</b></p>
-  <ul>
-    <li>Agar kondisi aplikasi lebih terstruktur</li>
-    <li>Mencegah error yang tidak ter-handle</li>
-  </ul>  <p><b>Batasan:</b></p>
-  <ul>
-    <li>Bisa menjadi kompleks jika state terlalu banyak</li>
-  </ul>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-sealed class AppState {}
-
-class LoadingState extends AppState {}
-
-class SuccessState extends AppState {
-  final List<String> items;
-  SuccessState(this.items);
-}
-
-class ErrorState extends AppState {
-  final String message;
-  ErrorState(this.message);
-}
-
-void updateUI(AppState state) {
-  switch (state) {
-    case LoadingState():
-      print('Loading...');
-    case SuccessState(:final items):
-      print('Success: $items');
-    case ErrorState(:final message):
-      print('Error: $message');
-  }
-}
-
-void main() {
-  print("=== APP STATE ===");
-
-  updateUI(LoadingState());
-  updateUI(SuccessState(["A", "B"]));
-  updateUI(ErrorState("Gagal"));
-}
-</code></pre>
-      </div>
-
-      <button onclick="openModal('https://dartpad.dev/?id=433210ab2c6246f38cbd5bc505b64eb7&run=true')">Run Program</button>
+      <button onclick="openModal('https://dartpad.dev/?id=4845122e8709768d9ab079cd88a2ad36&run=true')">Run Program</button>
     </section>
 
     <section>
       <h2> Ringkasan & Best Practices</h2>
-      <p><b>Ringkasan:</b></p>
-  <ul>
-    <li>Sealed class digunakan untuk membatasi hierarki dan mendukung pattern matching</li>
-    <li>Base class digunakan sebagai dasar class yang hanya dapat di-extend</li>
-    <li>Final class digunakan untuk mencegah pewarisan dari luar</li>
-  </ul>
-
-  <p><b>Best Practices:</b></p>
-  <ul>
-    <li>Gunakan sealed class untuk state atau kondisi yang jumlahnya terbatas</li>
-    <li>Gunakan base class untuk membuat kerangka dasar program</li>
-    <li>Gunakan final class untuk class yang tidak ingin diubah atau diwariskan</li>
-  </ul>
+      <section>
+  <h2>Ringkasan</h2>
+  <ol>
+    <li>Generic bikin kode lebih aman karena tipe datanya jelas</li>
+    <li>Bisa dipakai di class, fungsi, dan collection seperti list</li>
+    <li>Penulisan lebih simpel karena ada type inference</li>
+    <li>Tipe data bisa dibatasi supaya tidak sembarangan</li>
+  </ol>
 </section>
 
       <section>
