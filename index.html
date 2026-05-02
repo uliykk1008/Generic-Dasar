@@ -1100,18 +1100,7 @@ void main() {
 </section>
 
       <section>
-  <h2> Bonus Base Class Repository</h2>
-      <p>
-        Repository menggunakan base class agar hanya bisa diwariskan menggunakan extends,
-    bukan diimplementasikan sembarangan.<p>
-  Penggunaan base atau abstract class bertujuan untuk mencegah implementasi langsung
-  yang tidak sesuai, sehingga hanya class turunan yang mengikuti aturan yang dapat digunakan.
-</p>
-  </p>  <p><b>Fitur Base Class pada Repository:</b></p>
-  <ul>
-    <li>Hanya bisa diwariskan dengan extends</li>
-    <li>Tidak bisa digunakan dengan implements di luar library</li>
-    <li>Menjaga struktur method tetap sama</li>
+  <h2> Latihan</h2>
     
      <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -1119,196 +1108,73 @@ void main() {
 // NIM   : 251410008
 // Kelas : SI2A
           
- // repository.dart
-base class Repository {
-  void create(String data) {
-    print("Create data: $data");
+ class UliyaStack<T> {
+  final List<T> _data = [];
+
+  void push(T value) => _data.add(value);
+
+  T? pop() {
+    if (_data.isEmpty) return null;
+    return _data.removeLast();
   }
 
-  void read() {
-    print("Read data");
-  }
-
-  void update(String data) {
-    print("Update data: $data");
-  }
-
-  void delete(String data) {
-    print("Delete data: $data");
+  T? peek() {
+    if (_data.isEmpty) return null;
+    return _data.last;
   }
 }
-   </code></pre>
-      </div>
-  </ul>  <p><b>Kenapa menggunakan base:</b></p>
-  <ul>
-    <li>Menjaga struktur CRUD tetap konsisten</li>
-    <li>Mencegah implementasi yang tidak sesuai</li>
-    <li>Membatasi penggunaan class agar lebih terkontrol</li>
-  </ul>  <p><b>Batasan:</b></p>
-  <ul>
-    <li>Tidak bisa diimplementasikan menggunakan implements</li>
-  </ul>
 
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
+List<T> mergeLists<T>(List<T> a, List<T> b) {
+  return List<T>.from(a)..addAll(b);
+}
 
-import 'repository.dart';
+class UliyaResponse<T> {
+  T? data;
+  String? error;
 
-base class UserRepository extends Repository {
-  @override
-  void create(String data) {
-    print("User created: $data");
+  UliyaResponse({this.data, this.error});
+}
+
+class UliyaRepository<T> {
+  final List<T> _items = [];
+
+  void add(T item) => _items.add(item);
+
+  List<T> getAll() => List<T>.from(_items);
+
+  T? getAt(int index) {
+    if (index < 0 || index >= _items.length) return null;
+    return _items[index];
   }
+
+  void remove(T item) => _items.remove(item);
 }
 
 void main() {
-  var repo = UserRepository();
-  repo.create("Uliya Gumpari");
-  repo.read();
-  repo.update("Data Baru");
-  repo.delete("Data Lama");
-}
-</code></pre>
-      </div>
-      
-      <button onclick="showImage('Output4.jpg')">Lihat Output Succes</button>
-      <p>
-Contoh berikut menunjukkan kesalahan dalam penggunaan base class,
-yaitu menggunakan implements serta method yang tidak sesuai
-dengan class induknya.
-</p>
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
+  var stack = UliyaStack<int>();
+  stack.push(1);
+  stack.push(2);
 
-import 'repository.dart';
+  print(stack.peek());
+  print(stack.pop());
 
-// ERROR
-base class UliyaRepository implements Repository {
-  @override
-  void create(String data) {
-    print("Data dibuat oleh Uliya: $data");
-  }
+  var hasil = mergeLists<int>([1, 2], [3, 4]);
+  print(hasil);
 
-  @override
-  void read() {
-    print("Menampilkan data Uliya");
-  }
+  var response = UliyaResponse<String>(data: "OK");
+  print(response.data);
 
-  @override
-  void update(int id) { // ❌ kurang parameter (harusnya ada String data)
-    print("Update id: $id");
-  }
-
-  @override
-  void delete(String id) { // ❌ tipe data salah (harusnya int)
-    print("Hapus id: $id");
-  }
-}
-
-void main() {}
-</code></pre>
-      </div>
-      
-      <button onclick="showImage('Output9.jpg')">Lihat Output Error</button>
-    </section>
-
-    <section>
-  <h2> Bonus Final Class MathUtils</h2>
-<p>
-    MathUtils menggunakan final class karena hanya berisi fungsi utilitas
-    dan tidak perlu diwariskan ke class lain.<p>
-  Penggunaan final class bertujuan untuk memastikan bahwa class ini tidak dapat diwariskan
-  sehingga fungsi di dalamnya tetap aman dan tidak diubah oleh class lain.
-</p>
-  </p>  <p><b>Fitur Final Class pada MathUtils:</b></p>
-  <ul>
-    <li>Tidak bisa di-extend oleh class lain</li>
-    <li>Tidak bisa diimplementasikan</li>
-    <li>Cocok untuk method static</li>
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
- // math_utils.dart
-final class MathUtils {
-  static int tambah(int a, int b) {
-    return a + b;
-  }
-
-  static int kurang(int a, int b) {
-    return a - b;
-  }
-
-  static int kali(int a, int b) {
-    return a * b;
-  }
-
-  static double bagi(int a, int b) {
-    return a / b;
-  }
+  var repo = UliyaRepository<String>();
+  repo.add("Uliya");
+  print(repo.getAll());
 }
    </code></pre>
       </div>
-  </ul>  <p><b>Kenapa menggunakan final:</b></p>
-  <ul>
-    <li>Mencegah class diwariskan</li>
-    <li>Menjaga fungsi tetap sederhana dan aman</li>
-    <li>Menghindari perubahan dari subclass</li>
-  </ul>  <p><b>Batasan:</b></p>
-  <ul>
-    <li>Tidak bisa diwariskan sama sekali</li>
-  </ul>
-
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-import 'math_utils.dart';
-
-void main() {
-  print(MathUtils.tambah(10, 5));
-  print(MathUtils.kurang(10, 5));
-  print(MathUtils.kali(10, 5));
-  print(MathUtils.bagi(10, 5));
-}
-</code></pre>
-      </div>
-      
-      <button onclick="showImage('Output5.jpg')">Lihat Output Succes</button>
-      <p>
-Error ini terjadi karena class bertipe final tidak dapat diturunkan
-oleh class lain. MathUtils hanya bisa digunakan secara langsung
-tanpa menggunakan extends.
-</p>
-      <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// NIM   : 251410008
-// Kelas : SI2A
-
-
-import 'math_utils.dart';
-
-// ERROR
-class UliyaMath extends MathUtils {}
-
-void main() {}
-</code></pre>
-      </div>
-      
-      <button onclick="showImage('Output10.jpg')">Lihat Output Error</button>
+     <button onclick="openModal('https://dartpad.dev/?id=8164a3a48638fe97603dfda2865fb8c3&run=true')">Run Program</button>
+     
     </section>
 
+ 
   </div>
 
   <footer>
