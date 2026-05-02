@@ -904,17 +904,108 @@ void main() {
  </section>
     
     <section>
-      <h2>  Penggunaan Final Class</h2>
-      <p>
-    Class final hanya dapat dipakai langsung,tidak dapat
-        secara dari luar.
-  </p>
-  <p><b>Kegunaan:</b></p>
-  <ul>
-    <li>Mencegah class digunakan sebagai parent</li>
-    <li>Menjaga implementasi agar tidak diubah oleh subclass</li>
-    <li>Meningkatkan keamanan dan kestabilan kode</li>
-  </ul>
+  <h2>Praktik 1 Generic Class&Fungsi</h2>
+
+      <div class="code-container">
+        <div class="code-header">DART SOURCE CODE</div>
+        <pre><code>// Nama   : Uliya Gumpari
+// NIM   : 251410008
+// Kelas : SI2A
+
+  class UliyaRepo<T> {
+  final List<T> data = [];
+
+  void add(T item) => data.add(item);
+
+  T? get(int i) => (i >= 0 && i < data.length) ? data[i] : null;
+
+  List<T> all() => data;
+}
+
+void swapUliya<T>(List<T> list, int i, int j) {
+  if (i >= 0 && j >= 0 && i < list.length && j < list.length) {
+    var temp = list[i];
+    list[i] = list[j];
+    list[j] = temp;
+  }
+}
+
+class UliyaTriple<X, Y, Z> {
+  X a;
+  Y b;
+  Z c;
+
+  UliyaTriple(this.a, this.b, this.c);
+}
+
+void main() {
+  var repo = UliyaRepo<int>();
+  repo.add(1);
+  repo.add(2);
+
+  print(repo.get(0));
+  print(repo.all());
+
+  var list = [10, 20, 30];
+  swapUliya(list, 0, 2);
+  print(list);
+
+  var t = UliyaTriple("Uliya", 100, true);
+  print(t.a);
+  print(t.b);
+  print(t.c);
+}
+</code></pre>
+      </div>
+          <button onclick="openModal('https://dartpad.dev/?id=968d1a85e0b475d86bda39d4ab953d72&run=true')">Run Program</button>
+ </section>
+    
+    <section>
+  <h2>Perbandingan Generic, Dynamic, dan Object</h2>
+  <table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+      <th>Aspek</th>
+      <th>Generic &lt;T&gt;</th>
+      <th>dynamic</th>
+      <th>Object</th>
+    </tr>
+    <tr>
+      <td>Pemeriksaan Tipe</td>
+      <td>Saat compile (lebih aman)</td>
+      <td>Saat runtime (rawan error)</td>
+      <td>Saat compile (umum)</td>
+    </tr>
+    <tr>
+      <td>Fleksibilitas</td>
+      <td>Terbatas sesuai tipe</td>
+      <td>Sangat bebas</td>
+      <td>Cukup fleksibel</td>
+    </tr>
+    <tr>
+      <td>Keamanan Data</td>
+      <td>Tinggi</td>
+      <td>Rendah</td>
+      <td>Sedang</td>
+    </tr>
+    <tr>
+      <td>Performa</td>
+      <td>Cepat dan efisien</td>
+      <td>Lebih lambat (overhead)</td>
+      <td>Cukup cepat</td>
+    </tr>
+    <tr>
+      <td>Penggunaan</td>
+      <td>Harus sesuai tipe</td>
+      <td>Bisa berubah-ubah tipe</td>
+      <td>Menampung semua tipe</td>
+    </tr>
+    <tr>
+      <td>Casting</td>
+      <td>Tidak diperlukan</td>
+      <td>Tidak diperlukan</td>
+      <td>Diperlukan</td>
+    </tr>
+  </table>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -922,44 +1013,19 @@ void main() {
 // Nim    : 251410008
 // Kelas  : SI2A
 
-import 'libfinal.dart';
+// Generic → tipe sudah ditentukan dari awal
+var repoInt = UliyaRepo<int>();
+repoInt.add(10);
 
-void main() {
-  Settings settings = Settings(theme: "Dark", fontSize: 18);
-  settings.showSettings();
+// dynamic → bisa ganti tipe kapan saja
+dynamic nilai = 10;
+nilai = "sepuluh";
 
-  CustomSettings custom = CustomSettings("Dark", 18);
-  custom.showSettings();
-}
+// Object → tipe umum, perlu casting saat digunakan
+Object data = 10;
+int hasil = data as int;
 </code></pre>
       </div>
-
-    <button onclick="showImage('Output3.jpg')">Lihat Output Succes</button>
-    <p>
-Kesalahan ini terjadi karena final class tidak dapat digunakan
-untuk extends maupun implements. Class tersebut hanya bisa
-digunakan secara langsung tanpa diturunkan.
-</p>
-
-    <div class="code-container">
-        <div class="code-header">DART SOURCE CODE</div>
-        <pre><code>// Nama   : Uliya Gumpari
-// Nim    : 251410008
-// Kelas  : SI2A
-
-import 'libfinal.dart';
-
-// ERROR: mencoba extend final class
-class AdvancedSettings extends Settings {
-  AdvancedSettings(String theme, int fontSize)
-      : super(theme: theme, fontSize: fontSize);
-}
-
-void main() {}
-</code></pre>
-      </div>
-
-    <button onclick="showImage('Output8.jpg')">Lihat Output Error</button>
      </section>
 
     <section>
