@@ -851,11 +851,11 @@ void main() {
     </section>
     
      <section>
-      <h2> Final Class</h2>
-       <p>  Final class adalah class yang tidak dapat diwariskan atau di-extend oleh class lain.
-    Final class digunakan ketika sebuah class tidak ingin diwariskan agar implementasi tetap
-        aman dan tidak diubah oleh class lain.
-     </p>
+  <h2>Pembatasan Tipe dengan Class Abstract</h2>
+
+  <p>Generic dibatasi hanya untuk turunan dari class Animal.</p>
+  <p>Dog dan Cat dapat digunakan karena mengimplementasikan Animal.</p>
+  <p>Memastikan hanya object yang memiliki method makeSound yang bisa digunakan.</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -863,24 +863,44 @@ void main() {
 // NIM   : 251410008
 // Kelas : SI2A
 
-          //libfinal.dart
-final class Settings {
-  final String theme;
-  final int fontSize;
+         abstract class Animal {
+  void makeSound();
+}
 
-  Settings({required this.theme, required this.fontSize});
-
-  void showSettings() {
-    print("Theme: $theme, Font Size: $fontSize");
+class Dog implements Animal {
+  @override
+  void makeSound() {
+    print('Woof!');
   }
 }
 
-base class CustomSettings extends Settings {
-  CustomSettings(String theme, int fontSize)
-      : super(theme: theme, fontSize: fontSize);
+class Cat implements Animal {
+  @override
+  void makeSound() {
+    print('Meow!');
+  }
+}
+
+class AnimalCage<T extends Animal> {
+  T animal;
+
+  AnimalCage(this.animal);
+
+  void sound() {
+    animal.makeSound();
+  }
+}
+
+void main() {
+  var dogCage = AnimalCage<Dog>(Dog());
+  dogCage.sound(); // Output: Woof!
+
+  var catCage = AnimalCage<Cat>(Cat());
+  catCage.sound(); // Output: Meow!
 }
 </code></pre>
       </div>
+          <button onclick="openModal('https://dartpad.dev/?id=63ed6d58579868edabf379894a94da6f&run=true')">Run Program</button>
  </section>
     
     <section>
