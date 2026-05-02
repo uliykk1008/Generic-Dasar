@@ -717,8 +717,7 @@ void main() {
       </div>
 
     <button onclick="showImage('Output5.jpg')">Lihat Output Succes</button>
-     
- <p class="label Error"> Generic Extends (Error)</p>
+     <p class="label error"> Generic (Error)</p>
 
   <p>Menggunakan tipe yang tidak sesuai dengan batasan.</p>
   <p>String bukan turunan dari num.</p>
@@ -785,15 +784,28 @@ void main() {
       <button onclick="openModal('https://dartpad.dev/?id=77e1354914a1ca49d3d9f292f0bd5b15&run=true')">Run Program </button>
     </section>
 
+    <section>
+  <h2>Pembatasan Tipe dan Manfaatnya</h2>
+
+  <p>Pembatasan tipe membantu memastikan program hanya menggunakan data yang sesuai, sehingga lebih aman dari kesalahan saat dijalankan.</p>
+
+  <p>Dengan tipe yang jelas, kode menjadi lebih mudah dipahami dan dibaca oleh programmer.</p>
+
+  <p>Pembatasan ini juga memungkinkan penggunaan fungsi atau method khusus dari tipe tertentu.</p>
+
+  <p>Selain itu, dapat mencegah penggunaan tipe data yang tidak sesuai dengan tujuan program.</p>
+
+  <p>Hal ini membantu dalam membuat struktur kode yang lebih rapi dan terarah.</p>
+</section>
+
 <section>
-  <h2> Kapan Menggunakan Base Class</h2> 
-  </p>  <p><b>Kapan digunakan:</b></p>
-  <ul>
-    <li>Saat ingin membatasi pewarisan hanya dengan extends</li>
-    <li>Saat ingin menjaga struktur class tetap konsisten</li>
-    <li>Saat ingin mencegah penggunaan implements yang tidak sesuai</li>
-    <li>Saat membutuhkan kontrol penuh terhadap class turunan</li>
-  </ul>
+  <h2>Pembatasan Tipe pada Interface dan Class</h2>
+
+  <p>Digunakan untuk membatasi tipe data pada class atau interface.</p>
+  <p>Hanya tipe tertentu yang boleh digunakan.</p>
+  <p>Membuat kode lebih aman dan sesuai aturan.</p>
+  
+   <p class="label success"> Generic Extends (Jalan)</p>
 
       <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -801,37 +813,21 @@ void main() {
 // NIM   : 251410008
 // Kelas : SI2A
 
-import 'libbase.dart';
-
-base class Chicken extends Animal {
-  @override
-  void speak() {
-    print("Kukuruyuk!");
-  }
-}
-
-base class Goat extends Animal {
-  @override
-  void speak() {
-    print("Mbeeek!");
+void printIterable<T extends Iterable<dynamic>>(T iterable) {
+  for (var item in iterable) {
+    print(item);
   }
 }
 
 void main() {
-  Animal chicken = Chicken();
-  chicken.speak();
-
-  Animal goat = Goat();
-  goat.speak();
+  printIterable<List<int>>([1, 2, 3]);
+  printIterable<Set<String>>({'apple', 'banana'});
 }
 </code></pre>
       </div>
 
-    <button onclick="showImage('Output2.jpg')">Lihat Output Succes</button>
-    <p>
-Error ini muncul karena base class tidak bisa di-implements.
-Class tersebut hanya boleh menggunakan extends, bukan implements.
-</p>
+    <button onclick="showImage('Output7.jpg')">Lihat Output Succes</button>
+   <p class="label error"> Generic (Error)</p>
 
     <div class="code-container">
         <div class="code-header">DART SOURCE CODE</div>
@@ -839,21 +835,19 @@ Class tersebut hanya boleh menggunakan extends, bukan implements.
 // NIM   : 251410008
 // Kelas : SI2A
 
-import 'libbase.dart';
-
-// ERROR: mencoba implements base class dari file berbeda
-class SmallAnimal implements Animal {
-  @override
-  void speak() {
-    print("Suara kecil");
+void printIterable<T extends Iterable<dynamic>>(T iterable) {
+  for (var item in iterable) {
+    print(item);
   }
 }
 
-void main() {}
+void main() {
+  printIterable<int>(10); // ❌ ERROR
+}
 </code></pre>
       </div>
 
-    <button onclick="showImage('Output7.jpg')">Lihat Output Error</button>
+    <button onclick="showImage('Output8.jpg')">Lihat Output Error</button>
     </section>
     
      <section>
